@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(98, 72, 122);
+  min-height: 8vh;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color:rgb(47, 15, 78);
+
+  .headerNavigation {
+    display: flex;
+  }
+
+  .headerLinks {
+    display: flex;
+    list-style: none;
+
+    .headerLink {
+      padding: 5px 10px;
+    }
+  }
+
+
+}
