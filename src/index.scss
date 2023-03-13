@@ -18,19 +18,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  background-color: rgb(179, 220, 219);
 }
 
 .active {
   text-decoration: underline;
   animation-name: appear;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-out;
-  color: rgb(207, 215, 90)
+  color: rgb(207, 215, 90);
 }
 
 @keyframes appear {
-  0% { opacity: 0;};
-  100% {  opacity: 1;};
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 *,
