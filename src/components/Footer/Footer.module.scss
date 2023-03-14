@@ -1,4 +1,12 @@
 .footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgb(0, 0, 0);
-  min-height: 4vh;
+  min-height: 5vh;
+  color: aliceblue;
+  
+  .githubLink {
+    height: 30px;
+  }
 }
