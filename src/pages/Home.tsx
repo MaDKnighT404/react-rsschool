@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Input } from '../components/';
 import styles from './styles/Home.module.scss';
+import { products } from '../data/products';
 
 const Home = () => {
   return (
@@ -9,16 +10,17 @@ const Home = () => {
         <Input />
       </div>
       <div className={styles.cardsWrapper}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {products.map((product, i) => (
+          <Card
+            key={product.id}
+            img={product.images[1]}
+            title={product.title}
+            brand={product.brand}
+            description={product.description}
+            price={product.price}
+            rating={product.rating}
+          />
+        ))}
       </div>
     </>
   );
