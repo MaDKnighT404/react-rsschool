@@ -10,7 +10,8 @@ const Card = () => {
         <img className={styles.cardImg} src={products[0].images[0]} alt={products[0].title} />
         <span className={styles.cardBrand}>{products[0].brand}</span>
       </div>
-      <span className={styles.cardTitle}>{products[1].title}</span>
+      <span className={styles.cardTitle}>{products[0].title}</span>
+      <p className={styles.cardDescription}>{products[1].description}</p>
       <div className={styles.cardNumberWrapper}>
         <span className={styles.cardPrice}>{products[0].price}$</span>
         <span className={styles.cardRating}>
