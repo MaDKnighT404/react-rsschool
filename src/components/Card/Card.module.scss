@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  height: 350px;
+  height: 500px;
   background: rgb(173, 173, 173);
   border-radius: 15px;
   position: relative;
@@ -24,7 +24,7 @@
     .cardBrand {
       position: absolute;
       font-size: 0.9rem;
-      top: 51.5%;
+      top: 36%;
       right: 6px;
       background: black;
       color: azure;
@@ -37,14 +37,25 @@
     text-align: center;
     display: block;
     padding: 0 5px;
+    margin: 0 7px;
+    background: gray;
+    font-size: 1.1rem;
+  }
+
+  .cardDescription {
+    text-align: justify;
+    margin: 5px 0;
+    padding: 0 15px;
   }
 
   .cardNumberWrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 5px;
+    padding: 0 25px;
     .cardPrice {
+
     }
 
     .cardRating {
