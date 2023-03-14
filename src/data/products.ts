@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 61,
+    id: 1,
     title: 'Leather Straps Wristwatch',
     description: 'Style:Sport ,Clasp:Buckles ,Water Resistance Depth:3Bar',
     price: 120,
@@ -17,7 +17,7 @@ export const products = [
     ],
   },
   {
-    id: 62,
+    id: 2,
     title: 'Waterproof Leather Brand Watch',
     description:
       'Watch Crown With Environmental IPS Bronze Electroplating; Display system of 12 hours',
@@ -34,7 +34,7 @@ export const products = [
     ],
   },
   {
-    id: 63,
+    id: 3,
     title: 'Royal Blue Premium Watch',
     description: 'Men Silver Chain Royal Blue Premium Watch Latest Analog Watch',
     price: 50,
@@ -52,7 +52,7 @@ export const products = [
     ],
   },
   {
-    id: 64,
+    id: 4,
     title: 'Leather Strap Skeleton Watch',
     description: 'Leather Strap Skeleton Watch for Men - Stylish and Latest Design',
     price: 46,
@@ -70,7 +70,7 @@ export const products = [
     ],
   },
   {
-    id: 65,
+    id: 5,
     title: 'Stainless Steel Wrist Watch',
     description:
       "Stylish Watch For Man (Luxury) Classy Men's Stainless Steel Wrist Watch - Box Packed",
