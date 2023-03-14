@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     title: 'Leather Straps Wristwatch',
-    description: 'Style:Sport ,Clasp:Buckles ,Water Resistance Depth:3Bar',
+    description: 'Style:Sport, Clasp:Buckles, Water Resistance Depth: 3Bar',
     price: 120,
     discountPercentage: 7.14,
     rating: 4.63,
@@ -41,7 +41,7 @@ export const products = [
     discountPercentage: 2.56,
     rating: 4.89,
     stock: 142,
-    brand: 'SKMEI 9117',
+    brand: 'Curren',
     category: 'mens-watches',
     thumbnail: 'https://i.dummyjson.com/data/products/63/thumbnail.webp',
     images: [
@@ -92,7 +92,7 @@ export const products = [
   {
     id: 6,
     title: 'Steel Analog Couple Watches',
-    description: 'Elegant design, Stylish ,Unique & Trendy,Comfortable wear',
+    description: 'Elegant design, Stylish, Unique & Trendy, Comfortable wear',
     price: 35,
     discountPercentage: 3.23,
     rating: 4.79,

@@ -34,16 +34,19 @@
   }
 
   .cardTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    display: block;
     padding: 0 5px;
     margin: 0 7px;
     background: gray;
     font-size: 1.1rem;
+    height: 60px;
   }
 
   .cardDescription {
-    text-align: justify;
+    text-align: left;
     margin: 5px 0;
     padding: 0 15px;
   }
@@ -54,6 +57,7 @@
     align-items: center;
     margin-top: 5px;
     padding: 0 25px;
+    margin-top: auto;
     .cardPrice {
 
     }
@@ -68,8 +72,6 @@
   }
 
   .cardButtonWrapper {
-    margin-top: auto;
-
     align-self: center;
     width: 100%;
     padding: 15px;
