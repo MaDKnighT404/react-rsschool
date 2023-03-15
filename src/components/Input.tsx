@@ -1,11 +1,11 @@
 import React, { ChangeEvent, Component } from 'react';
-import styles from './Input.module.scss';
+import styles from './styles/Input.module.scss';
 
 interface InputState {
   value: string;
 }
 
-class InputComponent extends Component<Record<string, unknown>, InputState> {
+class Input extends Component<Record<string, unknown>, InputState> {
   state: InputState = {
     value: localStorage.getItem('inputValue') || '',
   };
@@ -31,4 +31,4 @@ class InputComponent extends Component<Record<string, unknown>, InputState> {
     );
   }
 }
-export default InputComponent;
+export default Input;
