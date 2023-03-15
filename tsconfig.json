@@ -16,5 +16,6 @@
     "resolveJsonModule": true,
     "types": ["vitest/globals","@testing-library/jest-dom"]
   },
-  "include": ["./src/**/*", "styled.d.ts", "src/pages/NotFound.tsx"]
+  "include": ["./src/**/*", "styled.d.ts", "src/pages/NotFound.tsx"],
+  "baseUrl": "./"
 }
