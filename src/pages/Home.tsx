@@ -10,7 +10,7 @@ const Home = () => {
         <Input />
       </div>
       <div className={styles.cardsWrapper}>
-        {products.map((product, i) => (
+        {products.map((product) => (
           <Card
             key={product.id}
             img={product.images[1]}
