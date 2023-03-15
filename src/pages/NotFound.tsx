@@ -3,7 +3,7 @@ import styles from './styles/NotFound.module.scss';
 const NotFound = () => {
   return (
     <div className={styles.wrapper}>
-      <img src="../assets/404error.jpg" alt="error picture" />
+      <img className={styles.errorImg} src="../assets/404error.png" alt="error picture" />
     </div>
   );
 };
