@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Input } from '../components/';
 import { products } from '../data/products';
 import styles from './styles/Home.module.scss';
