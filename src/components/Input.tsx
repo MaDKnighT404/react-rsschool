@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component } from 'react';
 import styles from './styles/Input.module.scss';
+import { AiOutlineSearch } from 'react-icons/Ai';
 
 interface InputState {
   value: string;
@@ -22,12 +23,15 @@ class Input extends Component<Record<string, unknown>, InputState> {
 
   render() {
     return (
-      <input
-        value={this.state.value}
-        onChange={this.handleChange}
-        placeholder="Search"
-        className={styles.input}
-      />
+      <div className={styles.inputContainer}>
+        <AiOutlineSearch className={styles.inputIcon} />
+        <input
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder="Search"
+          className={styles.input}
+        />
+      </div>
     );
   }
 }
