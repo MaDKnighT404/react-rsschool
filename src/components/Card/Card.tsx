@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styles from './Card.module.scss';
-import { products } from '../../data/products';
 import { GiRoundStar } from 'react-icons/Gi';
 
 interface Product {

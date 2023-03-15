@@ -7,7 +7,7 @@ const Header = () => {
       <nav className={styles.headerNavigation}>
         <ul className={styles.headerLinks}>
           <li>
-            <NavLink to="/" className={styles.headerLink}>
+            <NavLink to="/" className={styles.headerLink} aria-current="true">
               Home
             </NavLink>
           </li>

@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './Footer.module.scss';
 const Footer = () => {
   return (
-    <div className={styles.footer}>
-      <a className={styles.githubLink} href="https://github.com/MaDKnighT404">
+    <footer className={styles.footer}>
+      <a className={styles.githubLink} href="https://github.com/MaDKnighT404" aria-current="true">
         <svg
           width="30"
           height="30"
@@ -20,7 +20,7 @@ const Footer = () => {
           />
         </svg>
       </a>
-    </div>
+    </footer>
   );
 };
 
