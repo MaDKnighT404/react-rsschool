@@ -1,6 +1,6 @@
-import Card from './Card/Card';
-import Footer from './Footer/Footer';
-import Header from './Header/Header';
-import Input from './Input/Input';
+import Card from './Card';
+import Footer from './Footer';
+import Header from './Header';
+import Input from './Input';
 
 export { Card, Footer, Header, Input };

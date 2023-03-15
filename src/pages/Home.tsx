@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Input } from '../components/';
-import styles from './styles/Home.module.scss';
 import { products } from '../data/products';
+import styles from './styles/Home.module.scss';
 
 const Home = () => {
   return (
