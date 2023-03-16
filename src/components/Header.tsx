@@ -30,10 +30,10 @@ class Header extends React.Component<unknown, HeaderState> {
       <div className={styles.header}>
         <div className={styles.currentPage}>
           {this.state.pathname === '/'
-            ? 'Home'
+            ? 'Home page'
             : this.state.pathname === '/about'
-            ? 'About'
-            : '404 Error'}
+            ? 'About page'
+            : 'Error page'}
         </div>
         <nav className={styles.headerNavigation}>
           <ul className={styles.headerLinks}>
@@ -43,12 +43,18 @@ class Header extends React.Component<unknown, HeaderState> {
                 className={styles.headerLink}
                 aria-current="true"
                 onClick={this.handleNavLinkClick}
+                data-testid="home-link"
               >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" className={styles.headerLink} onClick={this.handleNavLinkClick}>
+              <NavLink
+                to="/about"
+                className={styles.headerLink}
+                onClick={this.handleNavLinkClick}
+                data-testid="about-link"
+              >
                 About
               </NavLink>
             </li>
