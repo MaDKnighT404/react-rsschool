@@ -7,7 +7,14 @@
   font-size: 1.8rem;
   text-decoration: none;
   position: relative;
-    box-shadow: 0px 5px 5px 0px #383838;
+  box-shadow: 0px 5px 5px 0px #383838;
+  position: relative;
+
+  .currentPage {
+    position: absolute;
+    left: 5%;
+    top: 23%;
+  }
 
   .headerNavigation {
     display: flex;
