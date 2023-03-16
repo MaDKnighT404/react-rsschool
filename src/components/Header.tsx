@@ -33,6 +33,8 @@ class Header extends Component<unknown, HeaderState> {
             ? 'Home page'
             : this.state.pathname === '/about'
             ? 'About page'
+            : this.state.pathname === '/form'
+            ? 'Form page'
             : 'Error page'}
         </div>
         <nav className={styles.headerNavigation}>
@@ -56,6 +58,16 @@ class Header extends Component<unknown, HeaderState> {
                 data-testid="about-link"
               >
                 About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/form"
+                className={styles.headerLink}
+                onClick={this.handleNavLinkClick}
+                data-testid="form-link"
+              >
+                Form
               </NavLink>
             </li>
           </ul>
