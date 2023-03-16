@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './styles/Header.module.scss';
 
@@ -6,7 +6,7 @@ interface HeaderState {
   pathname: string;
 }
 
-class Header extends React.Component<unknown, HeaderState> {
+class Header extends Component<unknown, HeaderState> {
   constructor(props: unknown) {
     super(props);
     this.state = {
