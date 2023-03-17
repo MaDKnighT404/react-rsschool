@@ -8,7 +8,7 @@
   }
 
   .formFieldset {
-    margin: 10px 0;
+    margin: 20px 0;
   }
 
   .formLabel {
@@ -26,16 +26,17 @@
     width: 300px;
   }
 
-
   .formToggle {
+    display: flex;
+    justify-content: space-between;
     cursor: pointer;
-    display: inline-block;
-    margin-top: 5px;
+    margin-top: 25px;
+    padding: 0 25px;
   }
-  
+
   .formToggleSwitch {
     display: inline-block;
-    background: rgb(108, 123, 196);
+    background: rgb(124, 130, 158);
     border-radius: 16px;
     width: 58px;
     height: 26px;
@@ -43,8 +44,9 @@
     vertical-align: middle;
     transition: background 0.25s;
   }
-  .formToggleSwitch:before, .formToggleSwitch:after {
-    content: "";
+  .formToggleSwitch:before,
+  .formToggleSwitch:after {
+    content: '';
   }
   .formToggleSwitch:before {
     display: block;
@@ -68,18 +70,48 @@
   .formToggleCheckbox:checked + .formToggleSwitch:before {
     left: 33px;
   }
-  
+
   .formToggleCheckbox {
     position: absolute;
     visibility: hidden;
   }
-  
+
   .formToggleLabel {
-    margin-right: 73px;
     position: relative;
     top: 2px;
   }
 
+  .formFieldsetCheckbox {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
+  .formCheckbox {
+    width: 150px;
+    display: inline-block;
+    margin: 10px 0;
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+    }
+  }
+
+  .formButtonSubmit {
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: rgb(103, 103, 167);
+    border: none;
+    color: white;
+    padding: 5px 0;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+
+    &:hover {
+      background: rgb(82, 82, 185);
+    }
+  }
 }
-
