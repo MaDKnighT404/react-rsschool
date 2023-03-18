@@ -3,7 +3,7 @@ import styles from './styles/UserForm.module.scss';
 
 interface FormValues {
   name: string;
-  telephone: string;
+  phone: string;
   email: string;
   birthday: string;
   gender: string;
@@ -31,7 +31,7 @@ class UserForm extends Component<unknown, UserFormState> {
     this.state = {
       values: {
         name: '',
-        telephone: '',
+        phone: '',
         email: '',
         birthday: '',
         gender: '',
@@ -78,10 +78,12 @@ class UserForm extends Component<unknown, UserFormState> {
       delete errors.name;
     }
 
-    if (values.telephone.length < 3) {
-      errors.telephone = 'telephone must be 3 letter minimum';
+    if (!values.phone.length) {
+      errors.phone = 'Please enter your phone number';
+    } else if (!/^\+\d{10,}$/.test(values.phone)) {
+      errors.phone = 'Please enter a valid phone number';
     } else {
-      delete errors.telephone;
+      delete errors.phone;
     }
 
     if (values.email.length < 3) {
@@ -123,18 +125,20 @@ class UserForm extends Component<unknown, UserFormState> {
             title="Two words. Each word at least 3 letters.First letter must be capitalized"
           />
           {errors.name && <div className={styles.formError}>{errors.name}</div>}
-          <label htmlFor="telephone" className={styles.formLabel}>
-            Telephone
+          <label htmlFor="phone" className={styles.formLabel}>
+            Phone
           </label>
           <input
             className={styles.formInputText}
-            id="telephone"
+            id="phone"
             type="text"
-            name="telephone"
-            value={values.telephone}
+            name="phone"
+            value={values.phone}
             onChange={this.handleInputChange}
+            placeholder="+79001001005"
+            title="First character is + Minimum 10 digits"
           />
-          {errors.telephone && <div className={styles.formError}>{errors.telephone}</div>}
+          {errors.phone && <div className={styles.formError}>{errors.phone}</div>}
           <label htmlFor="name" className={styles.formLabel}>
             Email
           </label>
