@@ -68,7 +68,11 @@ class UserForm extends Component<unknown, UserFormState> {
 
     const { errors, values } = this.state;
 
-    if (values.name.length < 3) {
+    if (!values.name.length) {
+      errors.name = 'Please enter your name';
+    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+      errors.name = 'Please enter a valid name';
+    } else if (values.name.length < 3) {
       errors.name = 'Name must be 3 letter minimum';
     } else {
       delete errors.name;
@@ -106,7 +110,7 @@ class UserForm extends Component<unknown, UserFormState> {
         <fieldset className={styles.formFieldset}>
           <legend>Contact information</legend>
           <label htmlFor="name" className={styles.formLabel}>
-            Name
+            Full name
           </label>
           <input
             className={styles.formInputText}
@@ -115,9 +119,10 @@ class UserForm extends Component<unknown, UserFormState> {
             name="name"
             value={values.name}
             onChange={this.handleInputChange}
+            placeholder="John Wick"
+            title="Two words. Each word at least 3 letters.First letter must be capitalized"
           />
           {errors.name && <div className={styles.formError}>{errors.name}</div>}
-          <br />
           <label htmlFor="telephone" className={styles.formLabel}>
             Telephone
           </label>
@@ -130,7 +135,6 @@ class UserForm extends Component<unknown, UserFormState> {
             onChange={this.handleInputChange}
           />
           {errors.telephone && <div className={styles.formError}>{errors.telephone}</div>}
-          <br />
           <label htmlFor="name" className={styles.formLabel}>
             Email
           </label>
@@ -143,7 +147,6 @@ class UserForm extends Component<unknown, UserFormState> {
             onChange={this.handleInputChange}
           />
           {errors.email && <div className={styles.formError}>{errors.email}</div>}
-          <br />
         </fieldset>
 
         <fieldset className={styles.formFieldset}>

@@ -114,4 +114,11 @@
       background: rgb(82, 82, 185);
     }
   }
+
+  .formError {
+    display: flex;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: rgb(226, 113, 113)
+  }
 }
