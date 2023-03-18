@@ -7,7 +7,7 @@ interface FormValues {
   email: string;
   birthday: string;
   gender: string;
-  photo: File | null;
+  photo: string;
   skills: {
     html: boolean;
     css: boolean;
@@ -22,6 +22,7 @@ interface FormValues {
 interface UserFormState {
   values: FormValues;
   errors: Partial<Record<keyof FormValues, string>>;
+  cardsArray: FormValues[];
 }
 
 class UserForm extends Component<unknown, UserFormState> {
@@ -35,7 +36,7 @@ class UserForm extends Component<unknown, UserFormState> {
         email: '',
         birthday: '',
         gender: '',
-        photo: null,
+        photo: '',
         skills: {
           html: false,
           css: false,
@@ -47,6 +48,7 @@ class UserForm extends Component<unknown, UserFormState> {
         notifications: false,
       },
       errors: {},
+      cardsArray: [],
     };
   }
 
@@ -86,8 +88,10 @@ class UserForm extends Component<unknown, UserFormState> {
       delete errors.phone;
     }
 
-    if (values.email.length < 3) {
-      errors.email = 'email must be 3 letter minimum';
+    if (!values.email.length) {
+      errors.email = 'Please enter your email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = 'Please enter a valid email';
     } else {
       delete errors.email;
     }
@@ -99,9 +103,10 @@ class UserForm extends Component<unknown, UserFormState> {
     if (Object.keys(errors).length > 0) {
       console.log('Validation errors:', errors);
       return;
+    } else {
+      this.state.cardsArray.push(values);
+      console.log(this.state.cardsArray);
     }
-
-    console.log('Form values:', values);
   };
 
   render() {
@@ -149,6 +154,7 @@ class UserForm extends Component<unknown, UserFormState> {
             name="email"
             value={values.email}
             onChange={this.handleInputChange}
+            placeholder="example@ex.com"
           />
           {errors.email && <div className={styles.formError}>{errors.email}</div>}
         </fieldset>
