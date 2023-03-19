@@ -1,21 +1,14 @@
 import { ChangeEvent, Component } from 'react';
 import styles from './styles/UserForm.module.scss';
 
-interface FormValues {
+export interface FormValues {
   name: string;
   phone: string;
   email: string;
   birthday: string;
   gender: string;
   photo: string;
-  skills: {
-    html: boolean;
-    css: boolean;
-    javascript: boolean;
-    typescript: boolean;
-    jest: boolean;
-    react: boolean;
-  };
+  skills: Record<string, boolean>;
   notifications: boolean;
 }
 
@@ -25,8 +18,12 @@ interface UserFormState {
   cardsArray: FormValues[];
 }
 
-class UserForm extends Component<unknown, UserFormState> {
-  constructor(props: unknown) {
+interface UserFormProps {
+  onSubmit: (formData: FormValues[]) => void;
+}
+
+class UserForm extends Component<UserFormProps, UserFormState> {
+  constructor(props: UserFormProps) {
     super(props);
 
     this.state = {
@@ -52,17 +49,29 @@ class UserForm extends Component<unknown, UserFormState> {
     };
   }
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    const errors = { ...this.state.errors };
+  handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, checked, type } = event.target;
+    const { values } = this.state;
 
-    this.setState((prevState) => ({
-      values: {
-        ...prevState.values,
-        [name]: value,
-      },
-      errors,
-    }));
+    if (type === 'checkbox') {
+      this.setState({
+        values: {
+          ...values,
+          skills: {
+            ...values.skills,
+            [name]: checked,
+          },
+          notifications: checked,
+        },
+      });
+    } else {
+      this.setState({
+        values: {
+          ...values,
+          [name]: value,
+        },
+      });
+    }
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -105,6 +114,7 @@ class UserForm extends Component<unknown, UserFormState> {
       return;
     } else {
       this.state.cardsArray.push(values);
+      this.props.onSubmit(this.state.cardsArray);
       console.log(this.state.cardsArray);
     }
   };
@@ -164,24 +174,39 @@ class UserForm extends Component<unknown, UserFormState> {
           <label htmlFor="birthday" className={styles.formLabel}>
             Birthday
           </label>
-          <input className={styles.formInputText} id="birthday" type="date" />
+          <input
+            className={styles.formInputText}
+            id="birthday"
+            name="birthday"
+            type="date"
+            onChange={this.handleInputChange}
+          />
           <br />
+
           <label htmlFor="gender" className={styles.formLabel}>
             Gender
           </label>
-          <select className={styles.formSelect} id="gender">
+          <select
+            className={styles.formSelect}
+            id="gender"
+            onChange={this.handleInputChange}
+            name="gender"
+          >
+            <option value="" disabled selected></option>
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
           <br />
-          <label htmlFor="birthday" className={styles.formLabel}>
+          <label htmlFor="photo" className={styles.formLabel}>
             Photo
           </label>
           <input
             className={styles.formInputText}
-            id="birthday"
+            id="photo"
             type="file"
+            name="photo"
             accept="image/png, image/jpeg"
+            onChange={this.handleInputChange}
           />
           <br />
         </fieldset>
@@ -189,22 +214,35 @@ class UserForm extends Component<unknown, UserFormState> {
         <fieldset className={(styles.formFieldset, styles.formFieldsetCheckbox)}>
           <legend> Skills</legend>
           <label className={styles.formCheckbox} htmlFor="html">
-            <input id="html" type="checkbox" /> Html
+            <input id="html" type="checkbox" name="html" onChange={this.handleInputChange} /> Html
           </label>
           <label className={styles.formCheckbox} htmlFor="css">
-            <input id="css" type="checkbox" /> Css
+            <input id="css" type="checkbox" name="css" onChange={this.handleInputChange} /> Css
           </label>
           <label className={styles.formCheckbox} htmlFor="javascript">
-            <input id="javascript" type="checkbox" /> JavaScript
+            <input
+              id="javascript"
+              type="checkbox"
+              name="javascript"
+              onChange={this.handleInputChange}
+            />
+            JavaScript
           </label>
           <label className={styles.formCheckbox} htmlFor="typescript">
-            <input id="typescript" type="checkbox" /> TypeScript
+            <input
+              id="typescript"
+              type="checkbox"
+              name="typescript"
+              onChange={this.handleInputChange}
+            />
+            TypeScript
           </label>
           <label className={styles.formCheckbox} htmlFor="jest">
-            <input id="jest" type="checkbox" /> Jest
+            <input id="jest" type="checkbox" name="jest" onChange={this.handleInputChange} /> Jest
           </label>
           <label className={styles.formCheckbox} htmlFor="react">
-            <input id="react" type="checkbox" /> React
+            <input id="react" type="checkbox" name="react" onChange={this.handleInputChange} />
+            React
           </label>
         </fieldset>
 
@@ -212,7 +250,12 @@ class UserForm extends Component<unknown, UserFormState> {
           <span className={styles.formToggleLabel}>
             I want to receive notifications about promo, sales, etc.
           </span>
-          <input className={styles.formToggleCheckbox} type="checkbox" />
+          <input
+            className={styles.formToggleCheckbox}
+            type="checkbox"
+            name="notifications"
+            onChange={this.handleInputChange}
+          />
           <div className={styles.formToggleSwitch}></div>
         </label>
         <br />
