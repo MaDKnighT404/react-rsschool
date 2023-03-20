@@ -14,11 +14,16 @@ class Input extends Component<Record<string, unknown>, InputState> {
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     this.setState({ value });
-    localStorage.setItem('inputValue', value);
   };
 
+  componentDidMount() {
+    const inputValue = localStorage.getItem('inputValue') ?? '';
+    this.setState({ value: inputValue });
+  }
+
   componentWillUnmount() {
-    localStorage.setItem('inputValue', this.state.value);
+    const { value } = this.state;
+    localStorage.setItem('inputValue', value);
   }
 
   render() {
