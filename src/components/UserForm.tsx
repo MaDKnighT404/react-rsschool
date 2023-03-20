@@ -115,9 +115,28 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     //   delete errors.email;
     // }
 
-    // this.setState(() => ({
-    //   errors,
-    // }));
+    if (!values.birthday.length) {
+      errors.birthday = 'Please enter birthday';
+    } else if (values.birthday.length) {
+      const today = new Date().toLocaleDateString('en-ca');
+      if (today < values.birthday) {
+        errors.birthday = "Birthday cannot be less than today's date";
+      } else {
+        delete errors.birthday;
+      }
+    } else {
+      delete errors.birthday;
+    }
+
+    if (!values.gender.length) {
+      errors.gender = 'Please select your gender';
+    } else {
+      delete errors.gender;
+    }
+
+    this.setState(() => ({
+      errors,
+    }));
 
     if (Object.keys(errors).length > 0) {
       console.log('Validation errors:', errors);
@@ -190,7 +209,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             type="date"
             onChange={this.handleInputChange}
           />
-          <br />
+          {errors.birthday && <div className={styles.formError}>{errors.birthday}</div>}
 
           <label htmlFor="gender" className={styles.formLabel}>
             Gender
@@ -208,7 +227,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
-          <br />
+          {errors.gender && <div className={styles.formError}>{errors.gender}</div>}
           <label htmlFor="photo" className={styles.formLabel}>
             Photo
           </label>
