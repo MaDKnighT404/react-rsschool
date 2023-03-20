@@ -50,20 +50,30 @@ class UserForm extends Component<UserFormProps, UserFormState> {
   }
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, checked, type } = event.target;
+    const { name, value, type } = event.target;
     const { values } = this.state;
 
     if (type === 'checkbox') {
-      this.setState({
-        values: {
-          ...values,
-          skills: {
-            ...values.skills,
-            [name]: checked,
+      const checkbox = event.target as HTMLInputElement;
+
+      if (name === 'notifications') {
+        this.setState({
+          values: {
+            ...values,
+            notifications: checkbox.checked,
           },
-          notifications: checked,
-        },
-      });
+        });
+      } else {
+        this.setState({
+          values: {
+            ...values,
+            skills: {
+              ...values.skills,
+              [name]: checkbox.checked,
+            },
+          },
+        });
+      }
     } else {
       this.setState({
         values: {
@@ -79,35 +89,35 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
     const { errors, values } = this.state;
 
-    if (!values.name.length) {
-      errors.name = 'Please enter your name';
-    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
-      errors.name = 'Please enter a valid name';
-    } else if (values.name.length < 3) {
-      errors.name = 'Name must be 3 letter minimum';
-    } else {
-      delete errors.name;
-    }
+    // if (!values.name.length) {
+    //   errors.name = 'Please enter your name';
+    // } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+    //   errors.name = 'Please enter a valid name';
+    // } else if (values.name.length < 3) {
+    //   errors.name = 'Name must be 3 letter minimum';
+    // } else {
+    //   delete errors.name;
+    // }
 
-    if (!values.phone.length) {
-      errors.phone = 'Please enter your phone number';
-    } else if (!/^\+\d{10,}$/.test(values.phone)) {
-      errors.phone = 'Please enter a valid phone number';
-    } else {
-      delete errors.phone;
-    }
+    // if (!values.phone.length) {
+    //   errors.phone = 'Please enter your phone number';
+    // } else if (!/^\+\d{10,}$/.test(values.phone)) {
+    //   errors.phone = 'Please enter a valid phone number';
+    // } else {
+    //   delete errors.phone;
+    // }
 
-    if (!values.email.length) {
-      errors.email = 'Please enter your email';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      errors.email = 'Please enter a valid email';
-    } else {
-      delete errors.email;
-    }
+    // if (!values.email.length) {
+    //   errors.email = 'Please enter your email';
+    // } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    //   errors.email = 'Please enter a valid email';
+    // } else {
+    //   delete errors.email;
+    // }
 
-    this.setState(() => ({
-      errors,
-    }));
+    // this.setState(() => ({
+    //   errors,
+    // }));
 
     if (Object.keys(errors).length > 0) {
       console.log('Validation errors:', errors);
@@ -115,7 +125,6 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     } else {
       this.state.cardsArray.push(values);
       this.props.onSubmit(this.state.cardsArray);
-      console.log(this.state.cardsArray);
     }
   };
 
@@ -191,8 +200,11 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             id="gender"
             onChange={this.handleInputChange}
             name="gender"
+            defaultValue={'select'}
           >
-            <option value="" disabled selected></option>
+            <option value="select" disabled>
+              Select
+            </option>
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
