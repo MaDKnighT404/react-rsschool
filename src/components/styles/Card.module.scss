@@ -1,0 +1,90 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 500px;
+  background: rgb(173, 173, 173);
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+  box-shadow: 0px 0px 11px 5px rgba(6, 42, 223, 0.398) inset;
+  &:hover {
+    background: rgb(224, 223, 223);
+  }
+
+  .cardImgWrapper {
+    .cardImg {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      padding: 10px 10px 5px;
+      width: 100%;
+      height: 200px;
+    }
+    .cardBrand {
+      position: absolute;
+      font-size: 0.9rem;
+      top: 33.5%;
+      right: 12px;
+      background: black;
+      color: azure;
+      padding: 3px 10px;
+      border-radius: 15px;
+    }
+  }
+
+  .cardTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5px;
+    border-radius: 10px;
+    margin: 0 12px;
+    background: gray;
+    font-size: 1.1rem;
+    height: 60px;
+  }
+
+  .cardDescription {
+    text-align: left;
+    margin: 5px 10px;
+    padding: 0 10px;
+  }
+
+  .cardNumberWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    padding: 0 25px;
+    margin-top: auto;
+    .cardPrice {
+    }
+
+    .cardRating {
+      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 50px;
+    }
+  }
+
+  .cardButtonWrapper {
+    align-self: center;
+    width: 100%;
+    padding: 15px;
+    .cardButton {
+      width: 100%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      transition: 0.2s ease-in;
+      &:hover {
+        background-color: orange;
+        border: 2px solid rgb(154, 100, 0);
+      }
+    }
+  }
+}
