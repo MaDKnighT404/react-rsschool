@@ -168,6 +168,25 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     } else {
       this.state.cardsArray.push(values);
       this.props.onSubmit(this.state.cardsArray);
+      this.setState({
+        values: {
+          name: '',
+          phone: '',
+          email: '',
+          birthday: 'дд.мм.гггг',
+          gender: 'Select',
+          photo: 'empty',
+          skills: {
+            html: false,
+            css: false,
+            javascript: false,
+            typescript: false,
+            jest: false,
+            react: false,
+          },
+          notifications: false,
+        },
+      });
     }
   };
 
