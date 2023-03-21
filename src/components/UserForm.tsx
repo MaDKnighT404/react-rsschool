@@ -74,7 +74,25 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           },
         });
       }
-    } else {
+    }
+
+    if (type === 'file') {
+      const file = (event.target as HTMLInputElement)?.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener('load', (event) => {
+          if (event.target) {
+            this.setState({
+              values: {
+                ...values,
+                photo: event.target.result as string,
+              },
+            });
+          }
+        });
+      }
+    } else if (type !== 'checkbox') {
       this.setState({
         values: {
           ...values,
@@ -89,31 +107,31 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
     const { errors, values } = this.state;
 
-    // if (!values.name.length) {
-    //   errors.name = 'Please enter your name';
-    // } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
-    //   errors.name = 'Please enter a valid name';
-    // } else if (values.name.length < 3) {
-    //   errors.name = 'Name must be 3 letter minimum';
-    // } else {
-    //   delete errors.name;
-    // }
+    if (!values.name.length) {
+      errors.name = 'Please enter your name';
+    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+      errors.name = 'Please enter a valid name';
+    } else if (values.name.length < 3) {
+      errors.name = 'Name must be 3 letter minimum';
+    } else {
+      delete errors.name;
+    }
 
-    // if (!values.phone.length) {
-    //   errors.phone = 'Please enter your phone number';
-    // } else if (!/^\+\d{10,}$/.test(values.phone)) {
-    //   errors.phone = 'Please enter a valid phone number';
-    // } else {
-    //   delete errors.phone;
-    // }
+    if (!values.phone.length) {
+      errors.phone = 'Please enter your phone number';
+    } else if (!/^\+\d{10,}$/.test(values.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    } else {
+      delete errors.phone;
+    }
 
-    // if (!values.email.length) {
-    //   errors.email = 'Please enter your email';
-    // } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    //   errors.email = 'Please enter a valid email';
-    // } else {
-    //   delete errors.email;
-    // }
+    if (!values.email.length) {
+      errors.email = 'Please enter your email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = 'Please enter a valid email';
+    } else {
+      delete errors.email;
+    }
 
     if (!values.birthday.length) {
       errors.birthday = 'Please enter birthday';
@@ -132,6 +150,12 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       errors.gender = 'Please select your gender';
     } else {
       delete errors.gender;
+    }
+
+    if (!values.photo.length) {
+      errors.photo = 'Please add a photo';
+    } else {
+      delete errors.photo;
     }
 
     this.setState(() => ({
@@ -239,7 +263,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             accept="image/png, image/jpeg"
             onChange={this.handleInputChange}
           />
-          <br />
+          {errors.photo && <div className={styles.formError}>{errors.photo}</div>}
         </fieldset>
 
         <fieldset className={(styles.formFieldset, styles.formFieldsetCheckbox)}>

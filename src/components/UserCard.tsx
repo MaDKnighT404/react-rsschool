@@ -13,7 +13,7 @@ class UserCard extends Component<UserCardProps> {
     return (
       <div className={styles.card}>
         <div className={styles.cardHeader}>
-          <img src={photo} alt={name} className={styles.cardAvatar} />
+          <img src={photo} className={styles.cardAvatar} />
           <h3>{name}</h3>
         </div>
         <div className={styles.cardBody}>
@@ -32,6 +32,16 @@ class UserCard extends Component<UserCardProps> {
           <p>
             <strong>Skills:</strong>
           </p>
+          {!skills.html &&
+          !skills.css &&
+          !skills.javascript &&
+          !skills.typescript &&
+          !skills.jest &&
+          !skills.react ? (
+            <h1> no skills checked</h1>
+          ) : (
+            <h1> Personal skills:</h1>
+          )}
           <ul className={styles.skillsList}>
             {skills.html && <li>HTML</li>}
             {skills.css && <li>CSS</li>}
