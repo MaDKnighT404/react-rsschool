@@ -6,3 +6,12 @@
   border-radius: 10px;
   border: 1px solid rgba(6, 42, 223);
 }
+
+.userCardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-start;
+  width: 800px;
+  margin: 0 auto 50px;
+}

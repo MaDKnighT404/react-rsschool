@@ -11,38 +11,38 @@ class UserCard extends Component<UserCardProps> {
     const { name, phone, email, birthday, gender, photo, skills, notifications } = this.props.data;
 
     return (
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <img src={photo} className={styles.cardAvatar} />
-          <h3>{name}</h3>
-        </div>
-        <div className={styles.cardBody}>
-          <p>
-            <strong>Phone:</strong> {phone}
-          </p>
-          <p>
+      <div className={styles.userCard}>
+        <figure className={styles.userCardFigure}>
+          <img src={photo} alt="photo" className={styles.userCardAvatar} />
+          <figcaption className={styles.userCardName}>{name}</figcaption>
+        </figure>
+        <ul className={styles.userCardBody}>
+          <li>
+            <strong>Phone:</strong> <span>{phone}</span>
+          </li>
+          <li>
             <strong>Email:</strong> {email}
-          </p>
-          <p>
+          </li>
+          <li>
             <strong>Birthday:</strong> {birthday}
-          </p>
-          <p>
+          </li>
+          <li>
             <strong>Gender:</strong> {gender}
-          </p>
-          <p>
+          </li>
+          <li className={styles.userCardSkills}>
             <strong>Skills:</strong>
-          </p>
+          </li>
           {!skills.html &&
           !skills.css &&
           !skills.javascript &&
           !skills.typescript &&
           !skills.jest &&
           !skills.react ? (
-            <h1> no skills checked</h1>
+            <h4 className={styles.userCardSkillMessage}> no skills checked</h4>
           ) : (
-            <h1> Personal skills:</h1>
+            ''
           )}
-          <ul className={styles.skillsList}>
+          <ul className={styles.userCardSkillList}>
             {skills.html && <li>HTML</li>}
             {skills.css && <li>CSS</li>}
             {skills.javascript && <li>JavaScript</li>}
@@ -50,10 +50,10 @@ class UserCard extends Component<UserCardProps> {
             {skills.jest && <li>Jest</li>}
             {skills.react && <li>React</li>}
           </ul>
-          <p>
+          <li>
             <strong>Notifications:</strong> {notifications ? 'Enabled' : 'Disabled'}
-          </p>
-        </div>
+          </li>
+        </ul>
       </div>
     );
   }

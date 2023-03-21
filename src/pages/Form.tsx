@@ -27,7 +27,7 @@ class Form extends Component<unknown, FormState> {
         <div className={styles.formWrapper}>
           <UserForm onSubmit={this.handleSubmit} />
         </div>
-        <div className={styles.formUserCardsWrapper}>
+        <div className={styles.userCardsWrapper}>
           {formData.length > 0 && formData.map((data, i) => <UserCard key={i} data={data} />)}
         </div>
       </>
