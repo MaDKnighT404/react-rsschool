@@ -166,6 +166,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       console.log('Validation errors:', errors);
       return;
     } else {
+      const form = event.target as HTMLFormElement;
       this.state.cardsArray.push(values);
       this.props.onSubmit(this.state.cardsArray);
       this.setState({
@@ -173,9 +174,9 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           name: '',
           phone: '',
           email: '',
-          birthday: 'дд.мм.гггг',
-          gender: 'Select',
-          photo: 'empty',
+          birthday: '',
+          gender: '',
+          photo: '',
           skills: {
             html: false,
             css: false,
@@ -187,6 +188,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           notifications: false,
         },
       });
+      form.reset();
     }
   };
 
