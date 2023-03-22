@@ -17,6 +17,7 @@ interface UserFormState {
   values: FormValues;
   errors: Partial<Record<keyof FormValues, string>>;
   cardsArray: FormValues[];
+  submitted: boolean;
 }
 
 interface UserFormProps {
@@ -48,6 +49,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       },
       errors: {},
       cardsArray: [],
+      submitted: false,
     };
   }
 
@@ -56,51 +58,29 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     const { values } = this.state;
 
     if (type === 'checkbox') {
-      const checkbox = event.target as HTMLInputElement;
-
+      const { checked } = event.target as HTMLInputElement;
+      let newValues = {};
       if (name === 'notifications') {
-        this.setState({
-          values: {
-            ...values,
-            notifications: checkbox.checked,
-          },
-        });
+        newValues = { notifications: checked };
       } else {
-        this.setState({
-          values: {
-            ...values,
-            skills: {
-              ...values.skills,
-              [name]: checkbox.checked,
-            },
-          },
-        });
+        newValues = { skills: { ...values.skills, [name]: checked } };
       }
-    }
-
-    if (type === 'file') {
+      this.setState({ values: { ...values, ...newValues } });
+    } else if (type === 'file') {
       const file = (event.target as HTMLInputElement)?.files?.[0];
       if (file) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.addEventListener('load', (event) => {
           if (event.target) {
-            this.setState({
-              values: {
-                ...values,
-                photo: event.target.result as string,
-              },
-            });
+            const photo = event.target.result as string;
+            this.setState({ values: { ...values, photo } });
           }
         });
       }
-    } else if (type !== 'checkbox') {
-      this.setState({
-        values: {
-          ...values,
-          [name]: value,
-        },
-      });
+    } else {
+      const newValues = { [name]: value };
+      this.setState({ values: { ...values, ...newValues } });
     }
   };
 
@@ -109,56 +89,56 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
     const { errors, values } = this.state;
 
-    if (!values.name.length) {
-      errors.name = 'Please enter your name';
-    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
-      errors.name = 'Please enter a valid name';
-    } else if (values.name.length < 3) {
-      errors.name = 'Name must be 3 letter minimum';
-    } else {
-      delete errors.name;
-    }
+    // if (!values.name.length) {
+    //   errors.name = 'Please enter your name';
+    // } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+    //   errors.name = 'Please enter a valid name';
+    // } else if (values.name.length < 3) {
+    //   errors.name = 'Name must be 3 letter minimum';
+    // } else {
+    //   delete errors.name;
+    // }
 
-    if (!values.phone.length) {
-      errors.phone = 'Please enter your phone number';
-    } else if (!/^\+\d{10,}$/.test(values.phone)) {
-      errors.phone = 'Please enter a valid phone number';
-    } else {
-      delete errors.phone;
-    }
+    // if (!values.phone.length) {
+    //   errors.phone = 'Please enter your phone number';
+    // } else if (!/^\+\d{10,}$/.test(values.phone)) {
+    //   errors.phone = 'Please enter a valid phone number';
+    // } else {
+    //   delete errors.phone;
+    // }
 
-    if (!values.email.length) {
-      errors.email = 'Please enter your email';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      errors.email = 'Please enter a valid email';
-    } else {
-      delete errors.email;
-    }
+    // if (!values.email.length) {
+    //   errors.email = 'Please enter your email';
+    // } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    //   errors.email = 'Please enter a valid email';
+    // } else {
+    //   delete errors.email;
+    // }
 
-    if (!values.birthday.length) {
-      errors.birthday = 'Please enter birthday';
-    } else if (values.birthday.length) {
-      const today = new Date().toLocaleDateString('en-ca');
-      if (today < values.birthday) {
-        errors.birthday = "Birthday cannot be less than today's date";
-      } else {
-        delete errors.birthday;
-      }
-    } else {
-      delete errors.birthday;
-    }
+    // if (!values.birthday.length) {
+    //   errors.birthday = 'Please enter birthday';
+    // } else if (values.birthday.length) {
+    //   const today = new Date().toLocaleDateString('en-ca');
+    //   if (today < values.birthday) {
+    //     errors.birthday = "Birthday cannot be less than today's date";
+    //   } else {
+    //     delete errors.birthday;
+    //   }
+    // } else {
+    //   delete errors.birthday;
+    // }
 
-    if (!values.gender.length) {
-      errors.gender = 'Please select your gender';
-    } else {
-      delete errors.gender;
-    }
+    // if (!values.gender.length) {
+    //   errors.gender = 'Please select your gender';
+    // } else {
+    //   delete errors.gender;
+    // }
 
-    if (!values.photo.length) {
-      errors.photo = 'Please add a photo';
-    } else {
-      delete errors.photo;
-    }
+    // if (!values.photo.length) {
+    //   errors.photo = 'Please add a photo';
+    // } else {
+    //   delete errors.photo;
+    // }
 
     this.setState(() => ({
       errors,
@@ -191,7 +171,15 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           notifications: false,
         },
       });
-      form.reset();
+      this.setState(() => ({
+        submitted: true,
+      }));
+      setTimeout(() => {
+        this.setState(() => ({
+          submitted: false,
+        }));
+        form.reset();
+      }, 1200);
     }
   };
 
@@ -377,6 +365,13 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         <button className={styles.formButtonSubmit} type="submit">
           Submit
         </button>
+        {this.state.submitted && (
+          <div className={styles.formSubmittedWrapper}>
+            <div className={styles.formSubmittedInner}>
+              <span className={styles.formSubmittedText}>Card successfully created!</span>
+            </div>
+          </div>
+        )}
       </form>
     );
   }
