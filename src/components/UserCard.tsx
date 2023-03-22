@@ -8,7 +8,8 @@ interface UserCardProps {
 
 class UserCard extends Component<UserCardProps> {
   render() {
-    const { name, phone, email, birthday, gender, photo, skills, notifications } = this.props.data;
+    const { name, phone, email, birthday, gender, country, photo, skills, notifications } =
+      this.props.data;
 
     return (
       <div className={styles.userCard}>
@@ -28,6 +29,9 @@ class UserCard extends Component<UserCardProps> {
           </li>
           <li>
             <strong>Gender:</strong> {gender}
+          </li>
+          <li>
+            <strong>Country:</strong> {country}
           </li>
           <li className={styles.userCardSkills}>
             <strong>Skills:</strong>

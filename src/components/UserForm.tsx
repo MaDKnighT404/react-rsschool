@@ -7,6 +7,7 @@ export interface FormValues {
   email: string;
   birthday: string;
   gender: string;
+  country: string;
   photo: string;
   skills: Record<string, boolean>;
   notifications: boolean;
@@ -33,6 +34,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         email: '',
         birthday: '',
         gender: '',
+        country: '',
         photo: '',
         skills: {
           html: false,
@@ -176,6 +178,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           email: '',
           birthday: '',
           gender: '',
+          country: '',
           photo: '',
           skills: {
             html: false,
@@ -244,6 +247,35 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
         <fieldset className={styles.formFieldset}>
           <legend>Personal information</legend>
+
+          <label htmlFor="gender" className={styles.formLabel}>
+            Gender
+          </label>
+          <div className={styles.formGenderWrapper}>
+            <div>
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                onChange={this.handleInputChange}
+              />
+              <label htmlFor="female">Female </label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                onChange={this.handleInputChange}
+              />
+              <label htmlFor="male">Male </label>
+            </div>
+          </div>
+          <br />
+          {errors.gender && <div className={styles.formError}>{errors.gender}</div>}
+
           <label htmlFor="birthday" className={styles.formLabel}>
             Birthday
           </label>
@@ -256,23 +288,30 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           />
           {errors.birthday && <div className={styles.formError}>{errors.birthday}</div>}
 
-          <label htmlFor="gender" className={styles.formLabel}>
-            Gender
+          <label htmlFor="country" className={styles.formLabel}>
+            Country
           </label>
           <select
             className={styles.formSelect}
-            id="gender"
+            id="country"
             onChange={this.handleInputChange}
-            name="gender"
+            name="country"
             defaultValue={'select'}
           >
             <option value="select" disabled>
-              Select
+              Select your country
             </option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="Russia">Russia</option>
+            <option value="Germany">Germany</option>
+            <option value="Italy">Italy</option>
+            <option value="Tajikistan">Tajikistan</option>
+            <option value="France">France</option>
           </select>
-          {errors.gender && <div className={styles.formError}>{errors.gender}</div>}
+          {errors.country && <div className={styles.formError}>{errors.country}</div>}
+
           <label htmlFor="photo" className={styles.formLabel}>
             Photo
           </label>
@@ -327,7 +366,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             I want to receive notifications about promo, sales, etc.
           </span>
           <input
-            className={styles.formToggleCheckbox}
+            className={styles.formToggleRadio}
             type="checkbox"
             name="notifications"
             onChange={this.handleInputChange}

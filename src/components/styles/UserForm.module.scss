@@ -26,6 +26,13 @@
     width: 300px;
   }
 
+  .formGenderWrapper {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 150px;
+
+  }
+
   .formToggle {
     display: flex;
     justify-content: space-between;
@@ -64,14 +71,14 @@
     background: linear-gradient(to bottom, #fff 0%, #fff 100%);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
   }
-  .formToggleCheckbox:checked + .formToggleSwitch {
+  .formToggleRadio:checked + .formToggleSwitch {
     background: rgba(6, 42, 223);
   }
-  .formToggleCheckbox:checked + .formToggleSwitch:before {
+  .formToggleRadio:checked + .formToggleSwitch:before {
     left: 33px;
   }
 
-  .formToggleCheckbox {
+  .formToggleRadio {
     position: absolute;
     visibility: hidden;
   }
