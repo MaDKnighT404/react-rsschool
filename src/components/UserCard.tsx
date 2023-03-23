@@ -8,13 +8,13 @@ interface UserCardProps {
 
 class UserCard extends Component<UserCardProps> {
   render() {
-    const { name, phone, email, birthday, gender, country, photo, skills, notifications } =
+    const { name, phone, email, birthday, gender, country, photoUrl, skills, notifications } =
       this.props.data;
 
     return (
       <div className={styles.userCard}>
         <figure className={styles.userCardFigure}>
-          <img src={photo} alt="photo" className={styles.userCardAvatar} />
+          <img src={photoUrl} alt="photo" className={styles.userCardAvatar} />
           <figcaption className={styles.userCardName}>{name}</figcaption>
         </figure>
         <ul className={styles.userCardBody}>

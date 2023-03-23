@@ -9,7 +9,8 @@ export interface FormValues {
   birthday: string;
   gender: string;
   country: string;
-  photo: string;
+  photoUrl: string;
+  photoName: string;
   skills: Record<string, boolean>;
   notifications: boolean;
 }
@@ -37,7 +38,8 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         birthday: '',
         gender: '',
         country: '',
-        photo: '',
+        photoUrl: '',
+        photoName: '',
         skills: {
           html: false,
           css: false,
@@ -72,10 +74,11 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       if (file) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
+
         reader.addEventListener('load', (event) => {
           if (event.target) {
-            const photo = event.target.result as string;
-            this.setState({ values: { ...values, photo } });
+            const photoUrl = event.target.result as string;
+            this.setState({ values: { ...values, photoUrl, photoName: file.name } });
           }
         });
       }
@@ -168,7 +171,8 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             birthday: '',
             gender: '',
             country: '',
-            photo: '',
+            photoUrl: '',
+            photoName: '',
             skills: {
               html: false,
               css: false,
@@ -314,11 +318,15 @@ class UserForm extends Component<UserFormProps, UserFormState> {
               onChange={this.handleInputChange}
             />
             <label htmlFor="photo" className={styles.formInputFileInner}>
-              <span className={styles.formInputFileBtn}>Choose file</span>
+              <span className={styles.formInputFileBtn}>
+                {this.state.values.photoUrl.length === 0
+                  ? 'Choose file'
+                  : `${this.state.values.photoName}`}
+              </span>
               <FaFileDownload className={styles.formInputFileIcon} />
             </label>
           </div>
-          {errors.photo && <div className={styles.formError}>{errors.photo}</div>}
+          {errors.photoUrl && <div className={styles.formError}>{errors.photoUrl}</div>}
         </fieldset>
         <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
           <legend> Skills</legend>
