@@ -1,5 +1,6 @@
 import { ChangeEvent, Component } from 'react';
 import styles from './styles/UserForm.module.scss';
+import { FaFileDownload } from 'react-icons/Fa';
 
 export interface FormValues {
   name: string;
@@ -188,7 +189,6 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     const { values, errors } = this.state;
     return (
       <form className={styles.form} action="" onSubmit={this.handleSubmit}>
-        <h2 className={styles.formTitle}>Form</h2>
         <fieldset className={styles.formFieldset}>
           <legend>Contact information</legend>
           <label htmlFor="name" className={styles.formLabel}>
@@ -269,7 +269,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             Birthday
           </label>
           <input
-            className={styles.formInputText}
+            className={styles.formInputDate}
             id="birthday"
             name="birthday"
             type="date"
@@ -281,7 +281,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             Country
           </label>
           <select
-            className={styles.formSelect}
+            className={styles.formInputSelect}
             id="country"
             onChange={this.handleInputChange}
             name="country"
@@ -304,18 +304,23 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           <label htmlFor="photo" className={styles.formLabel}>
             Photo
           </label>
-          <input
-            className={styles.formInputText}
-            id="photo"
-            type="file"
-            name="photo"
-            accept="image/png, image/jpeg"
-            onChange={this.handleInputChange}
-          />
+          <div className={styles.formInputFileWrapper}>
+            <input
+              className={styles.formInputFile}
+              id="photo"
+              type="file"
+              name="photo"
+              accept="image/png, image/jpeg"
+              onChange={this.handleInputChange}
+            />
+            <label htmlFor="photo" className={styles.formInputFileInner}>
+              <span className={styles.formInputFileBtn}>Choose file</span>
+              <FaFileDownload className={styles.formInputFileIcon} />
+            </label>
+          </div>
           {errors.photo && <div className={styles.formError}>{errors.photo}</div>}
         </fieldset>
-
-        <fieldset className={(styles.formFieldset, styles.formFieldsetCheckbox)}>
+        <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
           <legend> Skills</legend>
           <label className={styles.formCheckbox} htmlFor="html">
             <input id="html" type="checkbox" name="html" onChange={this.handleInputChange} /> Html
