@@ -41,9 +41,13 @@
       
         +.formGenderLabel::before {
           position: absolute;
+          background-size: 50%;
+          background-repeat: no-repeat;
+          background-position: center center;
           content: '';
           border-radius: 50%;
           transition: border .1s ease-in;
+          border: 1px solid transparent;
       }
       &:not(:disabled):active+label::before {
         background-color: #b3ffd9;
@@ -72,7 +76,6 @@
         position: relative;
         display: inline-block;
         width: 75px;
-        margin-left: 15px;
         background: #ffffff;
         border-radius: 15px;
         text-align: center;
@@ -82,10 +85,11 @@
       }
 
       .formInputGender:checked+.formGenderLabel {
-        border: 2px solid rgb(249, 125, 17);
+        animation-name: gender;
+        animation-duration: 1s;
       }
     }
-
+    
   }
 
   .formSelect {
@@ -295,5 +299,19 @@
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes gender {
+  0% {
+    border: 2px solid rgba(249, 125, 17, 00)
+  }
+
+  50% {
+    border: 2px solid rgb(249, 125, 17)
+  }
+
+  100% {
+    border: 2px solid rgba(249, 125, 17, 00)
   }
 }
