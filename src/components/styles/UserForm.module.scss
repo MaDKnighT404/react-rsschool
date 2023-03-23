@@ -118,7 +118,7 @@
     transition: 0.2s ease-in;
 
     &:hover {
-      background: rgb(82, 82, 185);
+      background: rgb(57, 57, 201);
     }
   }
 
@@ -143,11 +143,29 @@
       transform: translate(22%, 25%);
       background: rgba(103, 200, 6, 0.95);
       box-shadow: 0px 0px 11px 5px rgba(6, 42, 223, 0.913) inset;
+      animation-name: formSubmit;
+      animation-duration: 2.0s;
       .formSubmittedText {
         font-size: 1.5rem;
         color: rgb(30, 41, 100);
         user-select: none;
       }
     }
+  }
+}
+
+@keyframes formSubmit {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

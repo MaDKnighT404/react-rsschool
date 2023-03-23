@@ -151,26 +151,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       const form = event.target as HTMLFormElement;
       this.state.cardsArray.push(values);
       this.props.onSubmit(this.state.cardsArray);
-      this.setState({
-        values: {
-          name: '',
-          phone: '',
-          email: '',
-          birthday: '',
-          gender: '',
-          country: '',
-          photo: '',
-          skills: {
-            html: false,
-            css: false,
-            javascript: false,
-            typescript: false,
-            jest: false,
-            react: false,
-          },
-          notifications: false,
-        },
-      });
+
       this.setState(() => ({
         submitted: true,
       }));
@@ -178,8 +159,28 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         this.setState(() => ({
           submitted: false,
         }));
+        this.setState({
+          values: {
+            name: '',
+            phone: '',
+            email: '',
+            birthday: '',
+            gender: '',
+            country: '',
+            photo: '',
+            skills: {
+              html: false,
+              css: false,
+              javascript: false,
+              typescript: false,
+              jest: false,
+              react: false,
+            },
+            notifications: false,
+          },
+        });
         form.reset();
-      }, 1200);
+      }, 1800);
     }
   };
 
