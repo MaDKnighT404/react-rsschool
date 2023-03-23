@@ -24,6 +24,81 @@
     margin: 9px 0;
   }
 
+  .formGenderWrapper {
+    display: inline-flex;
+    justify-content: center;
+    width: 300px;
+    gap: 100px;
+
+    .formGenderInner {
+      position: relative;
+      cursor: pointer;
+      .formInputGender {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+      
+      +.formGenderLabel::before {
+        position: absolute;
+        content: '';
+        width: 17px;
+        height: 17px;
+        left: -15px;
+        top: 3px;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+        +.formGenderLabel::before {
+        position: absolute;
+        content: '';
+        width: 17px;
+        height: 17px;
+        left: -15px;
+        top: 3px;
+        border-radius: 50%;
+        border: 1px solid black;
+        transition: border .1s ease-in;
+
+      }
+      &:not(:disabled):active+label::before {
+        background-color: #b3ffd9;
+        border-color: #15ff00;
+        background-image: none;
+      }
+      
+      &:checked+.formGenderLabel::before {
+        width: 20px;
+        height: 20px;
+        left: -17px;
+        top: 2px;
+        background-size: 50%;
+        background-image: url('../../../public/assets/checked.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        border: 2px solid rgb(249, 125, 17);
+      }
+
+      &:disabled+.formGenderLabel::before {
+        border: 1px solid white;
+      }
+      }
+
+      .formGenderLabel {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        padding-left: 15px;
+        cursor: pointer;
+      }
+    }
+
+  }
+
   .formSelect {
     height: 30px;
     width: 300px;
@@ -41,6 +116,8 @@
     margin: 10px 0;
     padding: 3px;
     text-indent: 10px;
+    cursor: pointer;
+
     &:focus {
       border: 1px solid rgb(208, 114, 31);
     }
@@ -53,12 +130,6 @@
   .formInputSelect {
     padding: 5px;
     text-indent: 5px;
-  }
-
-  .formGenderWrapper {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 150px;
   }
 
   .formInputFileWrapper {
@@ -78,7 +149,6 @@
       align-items: center;
       justify-content: space-between;
       width: 300px;
-      cursor: pointer;
 
       &:active {
         border: 1px solid rgb(208, 114, 31);
@@ -88,11 +158,16 @@
         fill: green;
       }
 
-
+      .formInputFileBtn {
+        max-width: 265px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       .formInputFileIcon {
         font-size: 1.05rem;
-        transition: .2s ease-in;
+        transition: 0.2s ease-in;
       }
     }
   }

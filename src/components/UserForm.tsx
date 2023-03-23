@@ -245,25 +245,31 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             Gender
           </label>
           <div className={styles.formGenderWrapper}>
-            <div>
+            <div className={styles.formGenderInner}>
               <input
+                className={styles.formInputGender}
                 type="radio"
                 id="female"
                 name="gender"
                 value="female"
                 onChange={this.handleInputChange}
               />
-              <label htmlFor="female">Female </label>
+              <label htmlFor="female" className={styles.formGenderLabel}>
+                Female
+              </label>
             </div>
-            <div>
+            <div className={styles.formGenderInner}>
               <input
+                className={styles.formInputGender}
                 type="radio"
                 id="male"
                 name="gender"
                 value="male"
                 onChange={this.handleInputChange}
               />
-              <label htmlFor="male">Male </label>
+              <label htmlFor="male" className={styles.formGenderLabel}>
+                Male
+              </label>
             </div>
           </div>
           <br />
