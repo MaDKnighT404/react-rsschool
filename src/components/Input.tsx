@@ -1,10 +1,7 @@
-import React, { ChangeEvent, Component } from 'react';
-import styles from './styles/Input.module.scss';
+import { ChangeEvent, Component } from 'react';
 import { AiOutlineSearch } from 'react-icons/Ai';
-
-interface InputState {
-  value: string;
-}
+import { InputState } from 'types/types';
+import styles from './styles/Input.module.scss';
 
 class Input extends Component<Record<string, unknown>, InputState> {
   state: InputState = {

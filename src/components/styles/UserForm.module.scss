@@ -35,41 +35,41 @@
       cursor: pointer;
 
       .formInputGender {
-      position: absolute;
-      visibility: hidden;
-      opacity: 0;
-      
-        +.formGenderLabel::before {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+
+        + .formGenderLabel::before {
           position: absolute;
           background-size: 50%;
           background-repeat: no-repeat;
           background-position: center center;
           content: '';
           border-radius: 50%;
-          transition: border .1s ease-in;
+          transition: border 0.1s ease-in;
           border: 1px solid transparent;
-      }
-      &:not(:disabled):active+label::before {
-        background-color: #b3ffd9;
-        border-color: #15ff00;
-        background-image: none;
-      }
-      
-      &:checked+.formGenderLabel::before {
-        width: 20px;
-        height: 20px;
-        left: -30px;
-        top: 2px;
-        background-size: 50%;
-        background-image: url('../../../public/assets/checked.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        border: 2px solid rgb(249, 125, 17);
-      }
+        }
+        &:not(:disabled):active + label::before {
+          background-color: #b3ffd9;
+          border-color: #15ff00;
+          background-image: none;
+        }
 
-      &:disabled+.formGenderLabel::before {
-        border: 1px solid white;
-      }
+        &:checked + .formGenderLabel::before {
+          width: 20px;
+          height: 20px;
+          left: -30px;
+          top: 2px;
+          background-size: 50%;
+          background-image: url('../../../public/assets/checked.svg');
+          background-repeat: no-repeat;
+          background-position: center center;
+          border: 2px solid rgb(249, 125, 17);
+        }
+
+        &:disabled + .formGenderLabel::before {
+          border: 1px solid white;
+        }
       }
 
       .formGenderLabel {
@@ -84,12 +84,11 @@
         box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.32);
       }
 
-      .formInputGender:checked+.formGenderLabel {
+      .formInputGender:checked + .formGenderLabel {
         animation-name: gender;
         animation-duration: 1s;
       }
     }
-    
   }
 
   .formSelect {
@@ -273,8 +272,10 @@
       height: 180px;
       border-radius: 15px;
       transform: translate(20%, 90%);
-      background: rgba(103, 200, 6, 0.95);
-      box-shadow: 0px 0px 11px 5px rgba(6, 42, 223, 0.913) inset;
+      background: rgb(255, 255, 255);
+      box-shadow: 0px 0px 1px 3px rgb(150, 186, 186) inset,
+      0px 3px 8px 0px rgba(0, 0, 0, 0.747);
+
       animation-name: formSubmit;
       animation-duration: 2s;
       .formSubmittedText {
@@ -304,14 +305,14 @@
 
 @keyframes gender {
   0% {
-    border: 2px solid rgba(249, 125, 17, 00)
+    border: 2px solid rgba(249, 125, 17, 00);
   }
 
   50% {
-    border: 2px solid rgb(249, 125, 17)
+    border: 2px solid rgb(249, 125, 17);
   }
 
   100% {
-    border: 2px solid rgba(249, 125, 17, 00)
+    border: 2px solid rgba(249, 125, 17, 00);
   }
 }

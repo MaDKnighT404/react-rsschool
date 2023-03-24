@@ -1,10 +1,6 @@
 import { Component } from 'react';
 import styles from './styles/UserCard.module.scss';
-import { FormValues } from './UserForm';
-
-interface UserCardProps {
-  data: FormValues;
-}
+import { UserCardProps } from 'types/types';
 
 class UserCard extends Component<UserCardProps> {
   render() {

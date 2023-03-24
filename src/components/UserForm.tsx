@@ -1,30 +1,7 @@
 import { ChangeEvent, Component } from 'react';
 import styles from './styles/UserForm.module.scss';
 import { FaFileDownload } from 'react-icons/Fa';
-
-export interface FormValues {
-  name: string;
-  phone: string;
-  email: string;
-  birthday: string;
-  gender: string;
-  country: string;
-  photoUrl: string;
-  photoName: string;
-  skills: Record<string, boolean>;
-  notifications: boolean;
-}
-
-interface UserFormState {
-  values: FormValues;
-  errors: Partial<Record<keyof FormValues, string>>;
-  cardsArray: FormValues[];
-  submitted: boolean;
-}
-
-interface UserFormProps {
-  onSubmit: (formData: FormValues[]) => void;
-}
+import { UserFormProps, UserFormState } from 'types/types';
 
 class UserForm extends Component<UserFormProps, UserFormState> {
   constructor(props: UserFormProps) {
@@ -137,6 +114,12 @@ class UserForm extends Component<UserFormProps, UserFormState> {
       errors.gender = 'Please select your gender';
     } else {
       delete errors.gender;
+    }
+
+    if (!values.country.length) {
+      errors.country = 'Please select your country';
+    } else {
+      delete errors.country;
     }
 
     if (!values.photoUrl.length) {

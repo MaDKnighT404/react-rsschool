@@ -1,15 +1,7 @@
 import { Component } from 'react';
-import styles from './styles/Card.module.scss';
 import { GiRoundStar } from 'react-icons/Gi';
-
-interface Product {
-  img: string;
-  title: string;
-  brand: string;
-  description: string;
-  price: number;
-  rating: number;
-}
+import { Product } from 'types/types';
+import styles from './styles/Card.module.scss';
 
 class Card extends Component<Product> {
   render() {

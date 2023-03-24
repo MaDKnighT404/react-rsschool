@@ -1,10 +1,7 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { HeaderState } from 'types/types';
 import styles from './styles/Header.module.scss';
-
-interface HeaderState {
-  pathname: string;
-}
 
 class Header extends Component<unknown, HeaderState> {
   constructor(props: unknown) {
