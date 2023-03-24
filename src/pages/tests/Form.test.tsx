@@ -1,27 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
-import Form from '../Form';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-
-export interface FormValues {
-  name: string;
-  phone: string;
-  email: string;
-  birthday: string;
-  gender: string;
-  country: string;
-  photoUrl: string;
-  photoName: string;
-  skills: Record<string, boolean>;
-  notifications: boolean;
-}
-
-interface UserFormState {
-  values: FormValues;
-  errors: Partial<Record<keyof FormValues, string>>;
-  cardsArray: FormValues[];
-  submitted: boolean;
-}
+import Form from '../Form';
 
 it('display Form page', async () => {
   render(<Form />);

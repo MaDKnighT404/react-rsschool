@@ -1,7 +1,7 @@
 import { ChangeEvent, Component } from 'react';
-import styles from './styles/UserForm.module.scss';
 import { FaFileDownload } from 'react-icons/Fa';
 import { UserFormProps, UserFormState } from 'types/types';
+import styles from './styles/UserForm.module.scss';
 
 class UserForm extends Component<UserFormProps, UserFormState> {
   constructor(props: UserFormProps) {

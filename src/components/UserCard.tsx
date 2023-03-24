@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import styles from './styles/UserCard.module.scss';
 import { UserCardProps } from 'types/types';
+import styles from './styles/UserCard.module.scss';
 
 class UserCard extends Component<UserCardProps> {
   render() {

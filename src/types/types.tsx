@@ -42,3 +42,7 @@ export interface Product {
 export interface HeaderState {
   pathname: string;
 }
+
+export interface FormState {
+  formData: FormValues[];
+}

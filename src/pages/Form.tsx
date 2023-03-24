@@ -2,11 +2,7 @@ import { Component } from 'react';
 import UserForm from '../components/UserForm';
 import UserCard from '../components/UserCard';
 import styles from './styles/Form.module.scss';
-import { FormValues } from '../components/UserForm';
-
-interface FormState {
-  formData: FormValues[];
-}
+import { FormState, FormValues } from 'types/types';
 
 class Form extends Component<unknown, FormState> {
   state: FormState = {
