@@ -314,66 +314,84 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         </fieldset>
         <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
           <legend> Skills</legend>
-          <label className={styles.formCheckbox} htmlFor="html">
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="html"
               type="checkbox"
               name="html"
               data-testid="htmlInput"
               onChange={this.handleInputChange}
-            />{' '}
-            Html
-          </label>
-          <label className={styles.formCheckbox} htmlFor="css">
+            />
+            <label htmlFor="html" className={styles.formCheckboxLabel}>
+              Html
+            </label>
+          </div>
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="css"
               type="checkbox"
               name="css"
               data-testid="cssInput"
               onChange={this.handleInputChange}
-            />{' '}
-            Css
-          </label>
-          <label className={styles.formCheckbox} htmlFor="javascript">
+            />
+            <label htmlFor="css" className={styles.formCheckboxLabel}>
+              Css
+            </label>
+          </div>
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="javascript"
               type="checkbox"
               name="javascript"
               data-testid="javascriptInput"
               onChange={this.handleInputChange}
             />
-            JavaScript
-          </label>
-          <label className={styles.formCheckbox} htmlFor="typescript">
+            <label htmlFor="javascript" className={styles.formCheckboxLabel}>
+              javascript
+            </label>
+          </div>
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="typescript"
               type="checkbox"
               name="typescript"
               data-testid="typescriptInput"
               onChange={this.handleInputChange}
             />
-            TypeScript
-          </label>
-          <label className={styles.formCheckbox} htmlFor="jest">
+            <label htmlFor="typescript" className={styles.formCheckboxLabel}>
+              typescript
+            </label>
+          </div>
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="jest"
               type="checkbox"
               name="jest"
               data-testid="jestInput"
               onChange={this.handleInputChange}
-            />{' '}
-            Jest
-          </label>
-          <label className={styles.formCheckbox} htmlFor="react">
+            />
+            <label htmlFor="jest" className={styles.formCheckboxLabel}>
+              Jest
+            </label>
+          </div>
+          <div className={styles.formCheckboxWrapper}>
             <input
+              className={styles.formCheckboxInput}
               id="react"
               type="checkbox"
               name="react"
               onChange={this.handleInputChange}
               data-testid="reactInput"
             />
-            React
-          </label>
+            <label htmlFor="react" className={styles.formCheckboxLabel}>
+              React
+            </label>
+          </div>
         </fieldset>
 
         <label className={styles.formToggle}>
