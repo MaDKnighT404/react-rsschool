@@ -93,56 +93,56 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
     const { errors, values } = this.state;
 
-    // if (!values.name.length) {
-    //   errors.name = 'Please enter your name';
-    // } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
-    //   errors.name = 'Please enter a valid name';
-    // } else if (values.name.length < 3) {
-    //   errors.name = 'Name must be 3 letter minimum';
-    // } else {
-    //   delete errors.name;
-    // }
+    if (!values.name.length) {
+      errors.name = 'Please enter your name';
+    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+      errors.name = 'Please enter a valid name';
+    } else if (values.name.length < 3) {
+      errors.name = 'Name must be 3 letter minimum';
+    } else {
+      delete errors.name;
+    }
 
-    // if (!values.phone.length) {
-    //   errors.phone = 'Please enter your phone number';
-    // } else if (!/^\+\d{10,}$/.test(values.phone)) {
-    //   errors.phone = 'Please enter a valid phone number';
-    // } else {
-    //   delete errors.phone;
-    // }
+    if (!values.phone.length) {
+      errors.phone = 'Please enter your phone number';
+    } else if (!/^\+\d{10,}$/.test(values.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    } else {
+      delete errors.phone;
+    }
 
-    // if (!values.email.length) {
-    //   errors.email = 'Please enter your email';
-    // } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    //   errors.email = 'Please enter a valid email';
-    // } else {
-    //   delete errors.email;
-    // }
+    if (!values.email.length) {
+      errors.email = 'Please enter your email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = 'Please enter a valid email';
+    } else {
+      delete errors.email;
+    }
 
-    // if (!values.birthday.length) {
-    //   errors.birthday = 'Please enter birthday';
-    // } else if (values.birthday.length) {
-    //   const today = new Date().toLocaleDateString('en-ca');
-    //   if (today < values.birthday) {
-    //     errors.birthday = "Birthday cannot be less than today's date";
-    //   } else {
-    //     delete errors.birthday;
-    //   }
-    // } else {
-    //   delete errors.birthday;
-    // }
+    if (!values.birthday.length) {
+      errors.birthday = 'Please enter birthday';
+    } else if (values.birthday.length) {
+      const today = new Date().toLocaleDateString('en-ca');
+      if (today < values.birthday) {
+        errors.birthday = "Birthday cannot be less than today's date";
+      } else {
+        delete errors.birthday;
+      }
+    } else {
+      delete errors.birthday;
+    }
 
-    // if (!values.gender.length) {
-    //   errors.gender = 'Please select your gender';
-    // } else {
-    //   delete errors.gender;
-    // }
+    if (!values.gender.length) {
+      errors.gender = 'Please select your gender';
+    } else {
+      delete errors.gender;
+    }
 
-    // if (!values.photo.length) {
-    //   errors.photo = 'Please add a photo';
-    // } else {
-    //   delete errors.photo;
-    // }
+    if (!values.photoUrl.length) {
+      errors.photoUrl = 'Please add a photo';
+    } else {
+      delete errors.photoUrl;
+    }
 
     this.setState(() => ({
       errors,
@@ -192,26 +192,23 @@ class UserForm extends Component<UserFormProps, UserFormState> {
   render() {
     const { values, errors } = this.state;
     return (
-      <form className={styles.form} action="" onSubmit={this.handleSubmit}>
+      <form className={styles.form} data-testid="form" onSubmit={this.handleSubmit}>
         <fieldset className={styles.formFieldset}>
           <legend>Contact information</legend>
-          <label htmlFor="name" className={styles.formLabel}>
-            Full name
-          </label>
+          <span className={styles.formLabel}>Full name:</span>
           <input
             className={styles.formInputText}
             id="name"
             type="text"
             name="name"
             value={values.name}
+            data-testid="nameInput"
             onChange={this.handleInputChange}
             placeholder="John Wick"
             title="Two words. Each word at least 3 letters.First letter must be capitalized"
           />
           {errors.name && <div className={styles.formError}>{errors.name}</div>}
-          <label htmlFor="phone" className={styles.formLabel}>
-            Phone
-          </label>
+          <span className={styles.formLabel}>Phone:</span>
           <input
             className={styles.formInputText}
             id="phone"
@@ -220,18 +217,18 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             value={values.phone}
             onChange={this.handleInputChange}
             placeholder="+79001001005"
+            data-testid="phoneInput"
             title="First character is + Minimum 10 digits"
           />
           {errors.phone && <div className={styles.formError}>{errors.phone}</div>}
-          <label htmlFor="name" className={styles.formLabel}>
-            Email
-          </label>
+          <span className={styles.formLabel}>Email:</span>
           <input
             className={styles.formInputText}
             id="name"
             type="text"
             name="email"
             value={values.email}
+            data-testid="emailInput"
             onChange={this.handleInputChange}
             placeholder="example@ex.com"
           />
@@ -241,9 +238,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         <fieldset className={styles.formFieldset}>
           <legend>Personal information</legend>
 
-          <label htmlFor="gender" className={styles.formLabel}>
-            Gender
-          </label>
+          <span className={styles.formLabel}>Gender:</span>
           <div className={styles.formGenderWrapper}>
             <div className={styles.formGenderInner}>
               <input
@@ -252,6 +247,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
                 id="female"
                 name="gender"
                 value="female"
+                data-testid="femaleInput"
                 onChange={this.handleInputChange}
               />
               <label htmlFor="female" className={styles.formGenderLabel}>
@@ -265,6 +261,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
                 id="male"
                 name="gender"
                 value="male"
+                data-testid="maleInput"
                 onChange={this.handleInputChange}
               />
               <label htmlFor="male" className={styles.formGenderLabel}>
@@ -275,26 +272,24 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           <br />
           {errors.gender && <div className={styles.formError}>{errors.gender}</div>}
 
-          <label htmlFor="birthday" className={styles.formLabel}>
-            Birthday
-          </label>
+          <span className={styles.formLabel}>Birthday:</span>
           <input
             className={styles.formInputDate}
             id="birthday"
             name="birthday"
             type="date"
+            data-testid="birthdayInput"
             onChange={this.handleInputChange}
           />
           {errors.birthday && <div className={styles.formError}>{errors.birthday}</div>}
 
-          <label htmlFor="country" className={styles.formLabel}>
-            Country
-          </label>
+          <span className={styles.formLabel}>Country:</span>
           <select
             className={styles.formInputSelect}
             id="country"
             onChange={this.handleInputChange}
             name="country"
+            data-testid="countryInput"
             defaultValue={'select'}
           >
             <option value="select" disabled>
@@ -311,9 +306,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
           </select>
           {errors.country && <div className={styles.formError}>{errors.country}</div>}
 
-          <label htmlFor="photo" className={styles.formLabel}>
-            Photo
-          </label>
+          <span className={styles.formLabel}>Photo:</span>
           <div className={styles.formInputFileWrapper}>
             <input
               className={styles.formInputFile}
@@ -321,10 +314,11 @@ class UserForm extends Component<UserFormProps, UserFormState> {
               type="file"
               name="photo"
               accept="image/png, image/jpeg"
+              data-testid="photoInput"
               onChange={this.handleInputChange}
             />
             <label htmlFor="photo" className={styles.formInputFileInner}>
-              <span className={styles.formInputFileBtn}>
+              <span className={styles.formInputFileBtn} data-testid="photoName">
                 {this.state.values.photoUrl.length === 0
                   ? 'Choose file'
                   : `${this.state.values.photoName}`}
@@ -337,16 +331,31 @@ class UserForm extends Component<UserFormProps, UserFormState> {
         <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
           <legend> Skills</legend>
           <label className={styles.formCheckbox} htmlFor="html">
-            <input id="html" type="checkbox" name="html" onChange={this.handleInputChange} /> Html
+            <input
+              id="html"
+              type="checkbox"
+              name="html"
+              data-testid="htmlInput"
+              onChange={this.handleInputChange}
+            />{' '}
+            Html
           </label>
           <label className={styles.formCheckbox} htmlFor="css">
-            <input id="css" type="checkbox" name="css" onChange={this.handleInputChange} /> Css
+            <input
+              id="css"
+              type="checkbox"
+              name="css"
+              data-testid="cssInput"
+              onChange={this.handleInputChange}
+            />{' '}
+            Css
           </label>
           <label className={styles.formCheckbox} htmlFor="javascript">
             <input
               id="javascript"
               type="checkbox"
               name="javascript"
+              data-testid="javascriptInput"
               onChange={this.handleInputChange}
             />
             JavaScript
@@ -356,15 +365,29 @@ class UserForm extends Component<UserFormProps, UserFormState> {
               id="typescript"
               type="checkbox"
               name="typescript"
+              data-testid="typescriptInput"
               onChange={this.handleInputChange}
             />
             TypeScript
           </label>
           <label className={styles.formCheckbox} htmlFor="jest">
-            <input id="jest" type="checkbox" name="jest" onChange={this.handleInputChange} /> Jest
+            <input
+              id="jest"
+              type="checkbox"
+              name="jest"
+              data-testid="jestInput"
+              onChange={this.handleInputChange}
+            />{' '}
+            Jest
           </label>
           <label className={styles.formCheckbox} htmlFor="react">
-            <input id="react" type="checkbox" name="react" onChange={this.handleInputChange} />
+            <input
+              id="react"
+              type="checkbox"
+              name="react"
+              onChange={this.handleInputChange}
+              data-testid="reactInput"
+            />
             React
           </label>
         </fieldset>
@@ -377,6 +400,7 @@ class UserForm extends Component<UserFormProps, UserFormState> {
             className={styles.formToggleRadio}
             type="checkbox"
             name="notifications"
+            data-testid="receivedInput"
             onChange={this.handleInputChange}
           />
           <div className={styles.formToggleSwitch}></div>

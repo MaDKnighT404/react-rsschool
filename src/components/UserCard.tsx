@@ -12,9 +12,14 @@ class UserCard extends Component<UserCardProps> {
       this.props.data;
 
     return (
-      <div className={styles.userCard}>
+      <div className={styles.userCard} data-testid="userCard">
         <figure className={styles.userCardFigure}>
-          <img src={photoUrl} alt="photo" className={styles.userCardAvatar} />
+          <img
+            src={photoUrl}
+            alt="photoUrl"
+            className={styles.userCardAvatar}
+            data-testid="photo"
+          />
           <figcaption className={styles.userCardName}>{name}</figcaption>
         </figure>
         <ul className={styles.userCardBody}>

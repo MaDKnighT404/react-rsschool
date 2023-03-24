@@ -21,13 +21,18 @@ describe('Header', () => {
     );
     const homeLink = getByTestId('home-link');
     const aboutLink = getByTestId('about-link');
+    const formLink = getByTestId('form-link');
     const pathnameToHome = '/';
     const pathname2ToAbout = '/about';
+    const pathname3ToForm = '/form';
 
     fireEvent.click(homeLink);
     expect(pathnameToHome).toEqual('/');
 
     fireEvent.click(aboutLink);
     expect(pathname2ToAbout).toEqual('/about');
+
+    fireEvent.click(formLink);
+    expect(pathname3ToForm).toEqual('/form');
   });
 });
