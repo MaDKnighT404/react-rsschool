@@ -239,6 +239,8 @@
 
     .formCheckboxLabel {
       cursor: pointer;
+      user-select: none;
+      
       padding-left: 30px;
       &::before {
         content: '';
