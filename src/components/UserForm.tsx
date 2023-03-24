@@ -95,10 +95,11 @@ class UserForm extends Component<UserFormProps, UserFormState> {
 
     if (!values.name.length) {
       errors.name = 'Please enter your name';
-    } else if (!/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name)) {
+    } else if (
+      !/^(?:[А-ЯЁA-Z][а-яёa-z]{2,}\s){1,2}[А-ЯЁA-Z][а-яёa-z]{2,}$/.test(values.name) ||
+      values.name.length < 3
+    ) {
       errors.name = 'Please enter a valid name';
-    } else if (values.name.length < 3) {
-      errors.name = 'Name must be 3 letter minimum';
     } else {
       delete errors.name;
     }
