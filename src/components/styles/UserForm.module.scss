@@ -61,7 +61,7 @@
           left: -30px;
           top: 2px;
           background-size: 50%;
-          background-image: url('../../../public/assets/checked.svg');
+          background-image: url('../../../assets/checked.svg');
           background-repeat: no-repeat;
           background-position: center center;
           border: 2px solid rgb(249, 125, 17);
@@ -69,6 +69,7 @@
 
         &:disabled + .formGenderLabel::before {
           border: 1px solid white;
+          background-image: url('../../../assets/checked.svg');
         }
       }
 
@@ -260,7 +261,7 @@
         position: absolute;
         width: 12px;
         height: 12px;
-        background: url('../../../public/assets/checked.svg') no-repeat;
+        background: url('../../../assets/checked.svg') no-repeat;
         background-size: 12px 12px;
         opacity: 0;
         top: 6px;

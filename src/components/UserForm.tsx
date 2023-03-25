@@ -75,7 +75,6 @@ class UserForm extends Component<UserFormProps, UserFormState> {
     this.setState({ errors });
 
     if (Object.keys(errors).length > 0) {
-      console.log('Validation errors:', errors);
       return;
     } else {
       const form = event.target as HTMLFormElement;
