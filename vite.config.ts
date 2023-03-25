@@ -12,7 +12,7 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'html'],
       all: true,
-      include: ['src/**/*.tsx', '!**/main.tsx/**'],
+      include: ['src/**/*.tsx', '!**/main.tsx/**', '!**/types.tsx'],
     },
   },
   plugins: [react()],

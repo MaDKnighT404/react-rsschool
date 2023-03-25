@@ -13,6 +13,7 @@ it('updates formData state when handleSubmit is called', async () => {
   const phoneInput = getByTestId('phoneInput');
   const emailInput = getByTestId('emailInput');
   const genderInput = getByTestId('maleInput');
+  const countryInput = getByTestId('countryInput');
   const birthdayInput = getByTestId('birthdayInput');
   const photoInput = getByTestId('photoInput');
   const submitButton = getByRole('button', { name: 'Submit' });
@@ -24,6 +25,7 @@ it('updates formData state when handleSubmit is called', async () => {
     gender: 'male',
     birthday: '1990-10-10',
     photo: 'photo.png',
+    country: 'USA',
   };
 
   fireEvent.change(nameInput, { target: { value: newFormData.name } });
@@ -31,6 +33,7 @@ it('updates formData state when handleSubmit is called', async () => {
   fireEvent.change(emailInput, { target: { value: newFormData.email } });
   fireEvent.click(genderInput);
   fireEvent.change(birthdayInput, { target: { value: newFormData.birthday } });
+  fireEvent.change(countryInput, { target: { value: newFormData.country } });
 
   Object.defineProperty(window, 'FileReader', {
     value: vi.fn(() => ({
