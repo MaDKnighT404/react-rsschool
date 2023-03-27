@@ -26,10 +26,6 @@ export interface UserCardProps {
   data: FormValues;
 }
 
-export interface InputState {
-  value: string;
-}
-
 export interface Product {
   img: string;
   title: string;
@@ -37,10 +33,6 @@ export interface Product {
   description: string;
   price: number;
   rating: number;
-}
-
-export interface HeaderState {
-  pathname: string;
 }
 
 export interface FormState {

@@ -2,8 +2,8 @@ import { AiOutlineSearch } from 'react-icons/Ai';
 import { useState, useEffect, ChangeEvent } from 'react';
 import styles from './styles/Input.module.scss';
 
-function Input() {
-  const [value, setValue] = useState<string>(() => localStorage.getItem('inputValue') || '');
+const Input = () => {
+  const [value, setValue] = useState(() => localStorage.getItem('inputValue') || '');
 
   useEffect(() => {
     localStorage.setItem('inputValue', value);
@@ -19,6 +19,6 @@ function Input() {
       <input value={value} onChange={handleChange} placeholder="Search" className={styles.input} />
     </div>
   );
-}
+};
 
 export default Input;
