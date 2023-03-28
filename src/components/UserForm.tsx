@@ -72,6 +72,7 @@ const UserForm = ({ onSubmit }) => {
           data-testid="emailInput"
           placeholder="example@ex.com"
         />
+        <p className={styles.formError}>{errors.email?.message}</p>
       </fieldset>
 
       <fieldset className={styles.formFieldset}>
@@ -107,7 +108,7 @@ const UserForm = ({ onSubmit }) => {
           </div>
         </div>
         <br />
-
+        <p className={styles.formError}>{errors.gender?.message}</p>
         <span className={styles.formLabel}>Birthday:</span>
         <input
           className={styles.formInputDate}
@@ -116,7 +117,7 @@ const UserForm = ({ onSubmit }) => {
           type="date"
           data-testid="birthdayInput"
         />
-
+        <p className={styles.formError}>{errors.birthday?.message}</p>
         <span className={styles.formLabel}>Country:</span>
         <select
           className={styles.formInputSelect}
@@ -137,6 +138,7 @@ const UserForm = ({ onSubmit }) => {
           <option value="Tajikistan">Tajikistan</option>
           <option value="France">France</option>
         </select>
+        <p className={styles.formError}>{errors.country?.message}</p>
 
         <span className={styles.formLabel}>Photo:</span>
         <div className={styles.formInputFileWrapper}>
@@ -144,7 +146,7 @@ const UserForm = ({ onSubmit }) => {
             className={styles.formInputFile}
             id="photo"
             type="file"
-            {...register('photo')}
+            {...register('photoName')}
             accept="image/png, image/jpeg"
             data-testid="photoInput"
           />
@@ -152,6 +154,7 @@ const UserForm = ({ onSubmit }) => {
             <span className={styles.formInputFileBtn} data-testid="photoName"></span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>
+          <p className={styles.formError}>{errors.photoName?.message}</p>
         </div>
       </fieldset>
       <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
