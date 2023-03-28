@@ -2,7 +2,7 @@ import { ChangeEvent, Component } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
 import { UserFormProps, UserFormState } from 'types/types';
-import { schema } from '../helpers/validationInputs';
+import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
 import styles from './styles/UserForm.module.scss';
 
@@ -10,7 +10,6 @@ const UserForm = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -26,7 +25,7 @@ const UserForm = ({ onSubmit }) => {
       notifications: false,
     },
     reValidateMode: 'onSubmit',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   return (
@@ -39,6 +38,7 @@ const UserForm = ({ onSubmit }) => {
     >
       <fieldset className={styles.formFieldset}>
         <legend>Contact information</legend>
+
         <span className={styles.formLabel}>Full name:</span>
         <input
           className={styles.formInputText}
@@ -50,6 +50,7 @@ const UserForm = ({ onSubmit }) => {
           title="Two words. Each word at least 3 letters.First letter must be capitalized"
         />
         <p className={styles.formError}>{errors.fullName?.message}</p>
+
         <span className={styles.formLabel}>Phone:</span>
         <input
           className={styles.formInputText}
@@ -61,6 +62,7 @@ const UserForm = ({ onSubmit }) => {
           title="First character is + Minimum 10 digits"
         />
         <p className={styles.formError}>{errors.phone?.message}</p>
+
         <span className={styles.formLabel}>Email:</span>
         <input
           className={styles.formInputText}
@@ -154,6 +156,7 @@ const UserForm = ({ onSubmit }) => {
       </fieldset>
       <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
         <legend> Skills</legend>
+
         <div className={styles.formCheckboxWrapper}>
           <input
             className={styles.formCheckboxInput}
