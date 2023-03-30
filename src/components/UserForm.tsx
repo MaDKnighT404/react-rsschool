@@ -12,13 +12,12 @@ interface UserFormProps {
 }
 
 const UserForm = ({ submitData }: UserFormProps) => {
-  const [photoName, setPhotoName] = useState('');
-
   const {
     register,
     handleSubmit,
     getValues,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -37,10 +36,8 @@ const UserForm = ({ submitData }: UserFormProps) => {
   });
 
   const onSubmit = (data: FormValues) => {
-    // if (data.photo.length > 0) {
-    //   console.log(data.photo[0].name);
-    // }
     submitData(data);
+    reset();
   };
 
   return (
@@ -161,7 +158,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
           />
           <label htmlFor="photo" className={styles.formInputFileInner}>
             <span className={styles.formInputFileBtn} data-testid="photoName">
-              {watch('photo') ? `${getValues('photo')[0].name}` : 'Select your photo'}
+              {watch('photo') && getValues('photo')[0]
+                ? `${getValues('photo')[0].name}`
+                : 'Select your photo'}
             </span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>
