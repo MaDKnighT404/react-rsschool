@@ -1,14 +1,13 @@
 export interface FormValues {
-  name: string;
+  fullName: string;
   phone: string;
   email: string;
   birthday: string;
   gender: string;
   country: string;
-  photoUrl: string;
-  photoName: string;
+  photo: FileList;
   skills: Record<string, boolean>;
-  notifications: boolean;
+  notification: boolean;
 }
 
 export interface UserFormState {

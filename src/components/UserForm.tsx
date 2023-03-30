@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import { ChangeEvent, Component } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
-import { UserFormProps, UserFormState } from 'types/types';
+import { FormValues, UserCardProps } from 'types/types';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
 import styles from './styles/UserForm.module.scss';
 
-const UserForm = ({ onSubmit }) => {
+interface UserFormProps {
+  submitData: (formData: FormValues) => void;
+}
+
+const UserForm = ({ submitData }: UserFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
+    formState: { dirtyFields, errors },
+  } = useForm<FormValues>({
     defaultValues: {
       fullName: '',
       phone: '',
@@ -19,23 +24,23 @@ const UserForm = ({ onSubmit }) => {
       birthday: '',
       gender: '',
       country: '',
-      photoUrl: '',
-      photoName: '',
+      photo: undefined,
       skills: {},
-      notifications: false,
+      notification: false,
     },
     reValidateMode: 'onSubmit',
     resolver: yupResolver(validationSchema),
   });
 
+  const onSubmit = (data: FormValues) => {
+    // if (data.photo.length > 0) {
+    //   console.log(data.photo[0].name);
+    // }
+    submitData(data);
+  };
+
   return (
-    <form
-      className={styles.form}
-      data-testid="form"
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
-      })}
-    >
+    <form className={styles.form} data-testid="form" onSubmit={handleSubmit(onSubmit)}>
       <fieldset className={styles.formFieldset}>
         <legend>Contact information</legend>
 
@@ -146,16 +151,18 @@ const UserForm = ({ onSubmit }) => {
             className={styles.formInputFile}
             id="photo"
             type="file"
-            {...register('photoName')}
+            {...register('photo')}
             accept="image/png, image/jpeg"
             data-testid="photoInput"
           />
           <label htmlFor="photo" className={styles.formInputFileInner}>
-            <span className={styles.formInputFileBtn} data-testid="photoName"></span>
+            <span className={styles.formInputFileBtn} data-testid="photoName">
+              {dirtyFields.photo ? 'name photo' : 'Select your photo'}
+            </span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>
-          <p className={styles.formError}>{errors.photoName?.message}</p>
         </div>
+        <p className={styles.formError}>{errors.photo?.message}</p>
       </fieldset>
       <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
         <legend> Skills</legend>

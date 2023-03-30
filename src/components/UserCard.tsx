@@ -2,13 +2,18 @@ import { UserCardProps } from 'types/types';
 import styles from './styles/UserCard.module.scss';
 
 const UserCard = ({ data }: UserCardProps) => {
-  const { name, phone, email, birthday, gender, country, photoUrl, skills, notifications } = data;
+  const { fullName, phone, email, birthday, gender, country, photo, skills, notification } = data;
 
   return (
     <div className={styles.userCard} data-testid="userCard">
       <figure className={styles.userCardFigure}>
-        <img src={photoUrl} alt="photoUrl" className={styles.userCardAvatar} data-testid="photo" />
-        <figcaption className={styles.userCardName}>{name}</figcaption>
+        <img
+          src={URL.createObjectURL(photo[0])}
+          alt="photoUrl"
+          className={styles.userCardAvatar}
+          data-testid="photo"
+        />
+        <figcaption className={styles.userCardName}>{fullName}</figcaption>
       </figure>
       <ul className={styles.userCardBody}>
         <li>
@@ -48,7 +53,7 @@ const UserCard = ({ data }: UserCardProps) => {
           {skills.react && <li>React</li>}
         </ul>
         <li>
-          <strong>Notifications:</strong> {notifications ? 'Enabled' : 'Disabled'}
+          <strong>Notifications:</strong> {notification ? 'Enabled' : 'Disabled'}
         </li>
       </ul>
     </div>
