@@ -45,7 +45,7 @@ const UserCard = ({ data }: UserCardProps) => {
           <strong>Email:</strong> {email}
         </li>
         <li>
-          <strong>Birthday:</strong> {birthday}
+          <strong>Birthday:</strong> {new Date(birthday).toLocaleDateString('en-ca')}
         </li>
         <li>
           <strong>Gender:</strong> {gender}
