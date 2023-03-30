@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChangeEvent, Component } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
@@ -12,10 +12,14 @@ interface UserFormProps {
 }
 
 const UserForm = ({ submitData }: UserFormProps) => {
+  const [photoName, setPhotoName] = useState('');
+
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, errors },
+    getValues,
+    watch,
+    formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
       fullName: '',
@@ -157,7 +161,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
           />
           <label htmlFor="photo" className={styles.formInputFileInner}>
             <span className={styles.formInputFileBtn} data-testid="photoName">
-              {dirtyFields.photo ? 'name photo' : 'Select your photo'}
+              {watch('photo') ? `${getValues('photo')[0].name}` : 'Select your photo'}
             </span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>

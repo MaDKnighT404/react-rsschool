@@ -9,7 +9,7 @@ const Form = () => {
   const handleFormSubmit = (formData: FormValues) => {
     setCardData(formData);
   };
-
+  console.log(cardData);
   return (
     <>
       <div className={styles.formWrapper}>
