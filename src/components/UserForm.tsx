@@ -18,7 +18,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
     getValues,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
     defaultValues: {
       fullName: '',
@@ -42,7 +42,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
 
   const onSubmit = (data: FormValues) => {
     submitData(data);
-    setTimeout(() => reset(), 1000);
+    setTimeout(() => {
+      reset();
+    }, 2000);
   };
 
   return (
@@ -265,13 +267,13 @@ const UserForm = ({ submitData }: UserFormProps) => {
       <button className={styles.formButtonSubmit} type="submit">
         Submit
       </button>
-      {/* {this.state.submitted && (
+      {isSubmitSuccessful && (
         <div className={styles.formSubmittedWrapper}>
           <div className={styles.formSubmittedInner}>
             <span className={styles.formSubmittedText}>Card successfully created!</span>
           </div>
         </div>
-      )} */}
+      )}
     </form>
   );
 };
