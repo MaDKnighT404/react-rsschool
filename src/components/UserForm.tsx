@@ -28,7 +28,12 @@ const UserForm = ({ submitData }: UserFormProps) => {
       gender: '',
       country: '',
       photo: undefined,
-      skills: {},
+      html: false,
+      css: false,
+      javascript: false,
+      typescript: false,
+      jest: false,
+      react: false,
       notification: false,
     },
     reValidateMode: 'onSubmit',
@@ -37,7 +42,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
 
   const onSubmit = (data: FormValues) => {
     submitData(data);
-    reset();
+    setTimeout(() => reset(), 1000);
   };
 
   return (
@@ -175,7 +180,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="html"
             type="checkbox"
-            name="html"
+            {...register('html')}
             data-testid="htmlInput"
           />
           <label htmlFor="html" className={styles.formCheckboxLabel}>
@@ -187,7 +192,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="css"
             type="checkbox"
-            name="css"
+            {...register('css')}
             data-testid="cssInput"
           />
           <label htmlFor="css" className={styles.formCheckboxLabel}>
@@ -199,7 +204,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="javascript"
             type="checkbox"
-            name="javascript"
+            {...register('javascript')}
             data-testid="javascriptInput"
           />
           <label htmlFor="javascript" className={styles.formCheckboxLabel}>
@@ -211,7 +216,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="typescript"
             type="checkbox"
-            name="typescript"
+            {...register('typescript')}
             data-testid="typescriptInput"
           />
           <label htmlFor="typescript" className={styles.formCheckboxLabel}>
@@ -223,7 +228,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="jest"
             type="checkbox"
-            name="jest"
+            {...register('jest')}
             data-testid="jestInput"
           />
           <label htmlFor="jest" className={styles.formCheckboxLabel}>
@@ -235,7 +240,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="react"
             type="checkbox"
-            name="react"
+            {...register('react')}
             data-testid="reactInput"
           />
           <label htmlFor="react" className={styles.formCheckboxLabel}>

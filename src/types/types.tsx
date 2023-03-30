@@ -6,7 +6,12 @@ export interface FormValues {
   gender: string;
   country: string;
   photo: FileList;
-  skills: Record<string, boolean>;
+  html: boolean;
+  css: boolean;
+  javascript: boolean;
+  typescript: boolean;
+  jest: boolean;
+  react: boolean;
   notification: boolean;
 }
 
