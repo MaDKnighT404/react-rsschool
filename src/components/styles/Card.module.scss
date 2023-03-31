@@ -1,8 +1,8 @@
 .card {
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 500px;
+  width: 300px;
+  height: 570px;
   background: rgb(224, 223, 223);
   border-radius: 15px;
   position: relative;
@@ -19,21 +19,10 @@
       border-top-right-radius: 15px;
       padding: 10px 10px 5px;
       width: 100%;
-      height: 200px;
-    }
-    .cardBrand {
-      position: absolute;
-      font-size: 0.9rem;
-      top: 33.5%;
-      right: 12px;
-      background: black;
-      color: azure;
-      padding: 3px 10px;
-      border-radius: 15px;
+      height: 300px;
     }
   }
-
-  .cardTitle {
+  .cardName {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,38 +32,36 @@
     margin: 0 12px;
     background: rgb(199, 198, 198);
     font-size: 1.1rem;
-    height: 60px;
+    height: 35px;
   }
-
-  .cardDescription {
-    text-align: left;
-    margin: 5px 10px;
-    padding: 0 10px;
-  }
-
-  .cardNumberWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 5px;
-    padding: 0 25px;
-    margin-top: auto;
-    .cardPrice {
-    }
-
-    .cardRating {
-      display: block;
+  .cardDetails {
+    margin-top: 20px;
+    .cardDetailItem {
       display: flex;
-      align-items: center;
+      margin: 5px 25px;
       justify-content: space-between;
-      width: 50px;
+      border-bottom: 1px dotted blue;
+      .cardDetailName {
+        display: block;
+        text-align: center;
+      }
+
+      .cardDetailValue {
+        display: block;
+        text-align: center;
+      }
+    }
+    .cardDetailLocation {
+      margin-top: 20px;
+      display: block;
+      border-bottom: none;
     }
   }
 
   .cardButtonWrapper {
     align-self: center;
     width: 100%;
-    padding: 15px;
+    padding: 10px 15px;
     .cardButton {
       width: 100%;
       cursor: pointer;

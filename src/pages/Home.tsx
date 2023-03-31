@@ -1,5 +1,4 @@
 import { Card, Input } from '../components/';
-import { products } from '../data/products';
 import styles from './styles/Home.module.scss';
 import useFetch from '../helpers/useFetch';
 
@@ -20,15 +19,15 @@ const Home = () => {
       {isPending && <div>Loading...</div>}
       <div className={styles.cardsWrapper}>
         {cardData &&
-          products.map((product, i) => (
+          cardData.results.map((card) => (
             <Card
-              key={product.id}
-              img={cardData.results[i].image}
-              title={product.title}
-              brand={product.brand}
-              description={product.description}
-              price={product.price}
-              rating={product.rating}
+              key={card.id}
+              img={card.image}
+              name={card.name}
+              status={card.status}
+              gender={card.gender}
+              species={card.species}
+              location={card.location.name}
             />
           ))}
       </div>
