@@ -1,5 +1,4 @@
 import { render, screen, fireEvent, waitFor, createEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import UserCard from '../UserCard';
 
 const values = {

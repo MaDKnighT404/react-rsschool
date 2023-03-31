@@ -1,6 +1,5 @@
-import { render, fireEvent, createEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import UserForm from '../UserForm';
-import Form from '../../pages/Form';
 import { vi } from 'vitest';
 
 describe('UserForm', () => {
