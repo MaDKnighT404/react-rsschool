@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { ChangeEvent, Component } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
-import { FormValues, UserCardProps } from 'types/types';
+import { FormValues } from 'types/types';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
 import styles from './styles/UserForm.module.scss';
@@ -264,7 +262,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
         <div className={styles.formToggleSwitch}></div>
       </label>
       <br />
-      <button className={styles.formButtonSubmit} type="submit">
+      <button className={styles.formButtonSubmit} type="submit" data-testid="submitButton">
         Submit
       </button>
       {isSubmitSuccessful && (

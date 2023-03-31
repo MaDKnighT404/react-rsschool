@@ -5,7 +5,7 @@ export interface FormValues {
   birthday: string;
   gender: string;
   country: string;
-  photo: FileList;
+  photo: File[];
   html: boolean;
   css: boolean;
   javascript: boolean;

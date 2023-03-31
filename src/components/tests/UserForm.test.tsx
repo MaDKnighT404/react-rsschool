@@ -1,10 +1,11 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, createEvent, waitFor } from '@testing-library/react';
 import UserForm from '../UserForm';
+import Form from '../../pages/Form';
 import { vi } from 'vitest';
 
 describe('UserForm', () => {
   it('should update values state when inputs change', () => {
-    const { getByTestId } = render(<UserForm onSubmit={() => {}} />);
+    const { getByTestId } = render(<UserForm submitData={() => {}} />);
     const nameInput = getByTestId('nameInput') as HTMLInputElement;
     const phoneInput = getByTestId('phoneInput') as HTMLInputElement;
     const emailInput = getByTestId('emailInput') as HTMLInputElement;
@@ -19,7 +20,7 @@ describe('UserForm', () => {
   });
 
   it('should update skills state when checkboxes change', () => {
-    const { getByTestId } = render(<UserForm onSubmit={() => {}} />);
+    const { getByTestId } = render(<UserForm submitData={() => {}} />);
     const htmlCheckbox = getByTestId('htmlInput') as HTMLInputElement;
     const cssCheckbox = getByTestId('cssInput') as HTMLInputElement;
     const javascriptCheckbox = getByTestId('javascriptInput') as HTMLInputElement;
@@ -37,7 +38,7 @@ describe('UserForm', () => {
   });
 
   it('should update photoUrl and photoName state when photo input changes', () => {
-    const { getByTestId } = render(<UserForm onSubmit={() => {}} />);
+    const { getByTestId } = render(<UserForm submitData={() => {}} />);
     const photoInput = getByTestId('photoInput') as HTMLInputElement;
 
     Object.defineProperty(window, 'FileReader', {

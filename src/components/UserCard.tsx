@@ -22,7 +22,7 @@ const UserCard = ({ data }: UserCardProps) => {
     notification,
   } = data;
 
-  const file = photo[0];
+  const file = photo ? photo[0] : undefined;
   if (file) {
     const reader = new FileReader();
     reader.onload = () => {
