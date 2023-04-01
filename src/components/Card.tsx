@@ -1,14 +1,34 @@
+import { useState } from 'react';
 import { CardItem } from 'types/types';
 import styles from './styles/Card.module.scss';
-
+import Modal from './Modal';
 const Card = ({ img, name, status, gender, species, location }: CardItem) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleCardClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
-    <div className={styles.card}>
-      <div className={styles.cardImgWrapper}>
-        <img className={styles.cardImg} src={img} alt={name} />
+    <>
+      <div className={styles.card} onClick={handleCardClick}>
+        <div className={styles.cardImgWrapper}>
+          <img className={styles.cardImg} src={img} alt={name} />
+          <span className={styles.cardStatus}>{status}</span>
+        </div>
+        <p className={styles.cardName}>{name}</p>
       </div>
-      <span className={styles.cardName}>{name}</span>
-      <ul className={styles.cardDetails}>
+      {showModal && <Modal close={handleCloseModal} />}
+    </>
+  );
+};
+
+export default Card;
+
+{
+  /* <ul className={styles.cardDetails}>
         <li className={styles.cardDetailItem}>
           <span className={styles.cardDetailName}>Gender:</span>
           <span className={styles.cardDetailValue}>{gender}</span>
@@ -31,9 +51,5 @@ const Card = ({ img, name, status, gender, species, location }: CardItem) => {
       </ul>
       <div className={styles.cardButtonWrapper}>
         <button className={styles.cardButton}>Information</button>
-      </div>
-    </div>
-  );
-};
-
-export default Card;
+      </div> */
+}

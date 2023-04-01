@@ -71,3 +71,7 @@ export interface CardData {
     created: string;
   }>;
 }
+
+export interface ModalProps {
+  close: () => void;
+}
