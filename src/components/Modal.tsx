@@ -16,7 +16,7 @@ const Modal: React.FC<ModalProps & CardProps> = ({ close, data }) => {
   return (
     <div className={styles.modalWrapper} onClick={close}>
       <div className={styles.modalInner} onClick={stopPropagation}>
-        <img className={styles.modalClip} src="../assets/clip2.png" alt="clip"></img>
+        <img className={styles.modalClip} src="../assets/clip.png" alt="clip"></img>
         <button className={styles.modalCloseBtn} onClick={close}>
           X
         </button>
@@ -45,7 +45,9 @@ const Modal: React.FC<ModalProps & CardProps> = ({ close, data }) => {
             <span className={styles.modalDetailValue}>{data.gender}</span>
           </li>
         </ul>
-        <h4 className={styles.modalEpisodesTitle}>Episods:</h4>
+        <h4 className={styles.modalEpisodesTitle}>
+          {episodsNumbers.length > 1 ? 'Episods:' : 'Episod:'}
+        </h4>
         <div className={styles.modalEpisodesWrapper}>
           {episodsNumbers.map((episode) => {
             return (
