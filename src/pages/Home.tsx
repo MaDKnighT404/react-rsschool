@@ -9,7 +9,6 @@ const Home = () => {
     error,
   } = useFetch('https://rickandmortyapi.com/api/character');
 
-  console.log(cardData);
   return (
     <>
       <div className={styles.inputWrapper}>
@@ -18,18 +17,7 @@ const Home = () => {
       {error && <div>Error</div>}
       {isPending && <div>Loading...</div>}
       <div className={styles.cardsWrapper}>
-        {cardData &&
-          cardData.results.map((card) => (
-            <Card
-              key={card.id}
-              img={card.image}
-              name={card.name}
-              status={card.status}
-              gender={card.gender}
-              species={card.species}
-              location={card.location.name}
-            />
-          ))}
+        {cardData && cardData.results.map((data) => <Card key={data.id} data={data} />)}
       </div>
     </>
   );

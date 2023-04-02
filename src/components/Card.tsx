@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { CardItem } from 'types/types';
+import { CardProps } from 'types/types';
 import styles from './styles/Card.module.scss';
 import Modal from './Modal';
-const Card = ({ img, name, status, gender, species, location }: CardItem) => {
+const Card = ({ data }: CardProps) => {
   const [showModal, setShowModal] = useState(false);
   const handleCardClick = () => {
     setShowModal(true);
@@ -11,16 +11,17 @@ const Card = ({ img, name, status, gender, species, location }: CardItem) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
   return (
     <>
       <div className={styles.card} onClick={handleCardClick}>
         <div className={styles.cardImgWrapper}>
-          <img className={styles.cardImg} src={img} alt={name} />
-          <span className={styles.cardStatus}>{status}</span>
+          <img className={styles.cardImg} src={data.image} alt={data.name} />
+          <span className={styles.cardStatus}>{data.status}</span>
         </div>
-        <p className={styles.cardName}>{name}</p>
+        <p className={styles.cardName}>{data.name}</p>
       </div>
-      {showModal && <Modal close={handleCloseModal} />}
+      {showModal && <Modal close={handleCloseModal} data={data} />}
     </>
   );
 };

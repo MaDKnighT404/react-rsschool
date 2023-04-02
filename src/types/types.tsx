@@ -30,13 +30,29 @@ export interface UserCardProps {
   data: FormValues;
 }
 
-export interface CardItem {
-  img: string;
+export interface CardProps {
+  data: ServerAnswer;
+}
+
+export interface ServerAnswer {
+  id: number;
   name: string;
   status: string;
-  gender: string;
-  location: string;
   species: string;
+  type: string;
+  gender: string;
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
+  url: string;
+  created: string;
 }
 
 export interface FormState {
