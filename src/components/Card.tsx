@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { CardProps } from 'types/types';
 import styles from './styles/Card.module.scss';
 import Modal from './Modal';
-const Card = ({ data }: CardProps) => {
+
+const Card = ({ data, handleImageLoad }: CardProps) => {
   const [showModal, setShowModal] = useState(false);
+
   const handleCardClick = () => {
     setShowModal(true);
   };
@@ -16,7 +18,12 @@ const Card = ({ data }: CardProps) => {
     <>
       <div className={styles.card} onClick={handleCardClick}>
         <div className={styles.cardImgWrapper}>
-          <img className={styles.cardImg} src={data.image} alt={data.name} />
+          <img
+            className={styles.cardImg}
+            src={data.image}
+            alt={data.name}
+            onLoad={handleImageLoad}
+          />
           <span className={styles.cardStatus}>{data.status}</span>
         </div>
         <p className={styles.cardName}>{data.name}</p>

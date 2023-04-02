@@ -32,6 +32,7 @@ export interface UserCardProps {
 
 export interface CardProps {
   data: ServerAnswer;
+  handleImageLoad?: () => void;
 }
 
 export interface ServerAnswer {
