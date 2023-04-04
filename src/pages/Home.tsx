@@ -29,7 +29,7 @@ const Home = () => {
   }, [numImagesLoaded, numberOfCards]);
 
   useEffect(() => {
-    setCardKey(cardKey + 1);
+    setCardKey((cardKey) => cardKey + 1);
   }, [query]);
 
   return (
