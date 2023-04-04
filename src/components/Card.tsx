@@ -34,30 +34,3 @@ const Card = ({ data, handleImageLoad }: CardProps) => {
 };
 
 export default Card;
-
-{
-  /* <ul className={styles.cardDetails}>
-        <li className={styles.cardDetailItem}>
-          <span className={styles.cardDetailName}>Gender:</span>
-          <span className={styles.cardDetailValue}>{gender}</span>
-        </li>
-
-        <li className={styles.cardDetailItem}>
-          <span className={styles.cardDetailNam}>Species:</span>
-          <span className={styles.cardDetailValue}>{species}</span>
-        </li>
-
-        <li className={styles.cardDetailItem}>
-          <span className={styles.cardDetailName}>Status:</span>
-          <span className={styles.cardDetailValue}>{status}</span>
-        </li>
-
-        <li className={`${styles.cardDetailItem} ${styles.cardDetailLocation}`}>
-          <span className={styles.cardDetailName}>Location:</span>
-          <span className={styles.cardDetailValue}>{location}</span>
-        </li>
-      </ul>
-      <div className={styles.cardButtonWrapper}>
-        <button className={styles.cardButton}>Information</button>
-      </div> */
-}

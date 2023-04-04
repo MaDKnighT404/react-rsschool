@@ -1,66 +1,44 @@
-import { render } from '@testing-library/react';
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import Card from '../Card';
 
-describe('Card component', () => {
-  it('renders Card component without crashing', () => {
-    render(
-      <Card
-        img="https://example.com/image.jpg"
-        title="Example title"
-        brand="Example brand"
-        description="Example description"
-        price={9.99}
-        rating={4}
-      />
-    );
+describe('Card', () => {
+  const mockData = {
+    id: 1,
+    created: '2017-11-04T22:28:13.756Z',
+    episode: ['https://rickandmortyapi.com/api/episode/1'],
+    name: 'Rick Sanchez',
+    status: 'Alive',
+    species: 'human',
+    gender: 'male',
+    url: 'https://rickandmortyapi.com/api/character/19',
+    location: { name: 'unknown', url: '' },
+    type: 'Human with antennae',
+    origin: { name: 'unknown', url: '' },
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+  };
+
+  it('renders the card image with correct alt text', () => {
+    const { getByAltText } = render(<Card data={mockData} />);
+    const cardImage = getByAltText(mockData.name);
+    expect(cardImage).toBeInTheDocument();
   });
 
-  it('renders image correctly', () => {
-    const { getByAltText } = render(
-      <Card
-        img="https://example.com/image.jpg"
-        title="Example title"
-        brand="Example brand"
-        description="Example description"
-        price={9.99}
-        rating={4}
-      />
-    );
-    const image = getByAltText('Example title');
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
+  it('opens the modal when the card is clicked', () => {
+    const { getByText, getByTestId } = render(<Card data={mockData} />);
+    const card = getByText(mockData.name);
+    fireEvent.click(card);
+    const modal = getByTestId('modal');
+    expect(modal).toBeInTheDocument();
   });
 
-  test('renders title correctly', () => {
-    const { getByText } = render(
-      <Card
-        img="https://example.com/image.jpg"
-        title="Example title"
-        brand="Example brand"
-        description="Example description"
-        price={9.99}
-        rating={4}
-      />
-    );
-    const title = getByText('Example title');
-    expect(title).toBeInTheDocument();
-  });
-
-  test('renders price and rating correctly', () => {
-    const { getByText } = render(
-      <Card
-        img="https://example.com/image.jpg"
-        title="Example title"
-        brand="Example brand"
-        description="Example description"
-        price={9.99}
-        rating={4}
-      />
-    );
-    const price = getByText('9.99$');
-    expect(price).toBeInTheDocument();
-
-    const rating = getByText('4');
-    expect(rating).toBeInTheDocument();
+  it('closes the modal when the close button is clicked', () => {
+    const { getByText, getByTestId } = render(<Card data={mockData} />);
+    const card = getByText(mockData.name);
+    fireEvent.click(card);
+    const closeButton = getByTestId('closeModal');
+    const modal = getByTestId('modal');
+    fireEvent.click(closeButton);
+    expect(modal).not.toBeInTheDocument();
   });
 });

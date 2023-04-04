@@ -7,7 +7,7 @@ const Home = () => {
   const [query, setQuery] = useState('');
   const [cardLoaded, setCardLoaded] = useState(false);
   const [numImagesLoaded, setNumImagesLoaded] = useState(0);
-
+  const [cardKey, setCardKey] = useState(0);
   const handleSearch = (value: string) => {
     setQuery(value);
   };
@@ -15,7 +15,6 @@ const Home = () => {
   const {
     data: cardData,
     arrLength: numberOfCards,
-    isPending,
     error,
   } = useFetch(`https://rickandmortyapi.com/api/character/?name=${query}`);
 
@@ -28,21 +27,29 @@ const Home = () => {
       setCardLoaded(true);
     }
   }, [numImagesLoaded, numberOfCards]);
-  console.log(cardLoaded);
+
+  useEffect(() => {
+    setCardKey(cardKey + 1);
+  }, [query]);
+
   return (
     <>
       <div className={styles.inputWrapper}>
-        <Input onSearch={handleSearch} />
+        <Input
+          onSearch={handleSearch}
+          setCardLoaded={setCardLoaded}
+          setNumImagesLoaded={setNumImagesLoaded}
+        />
       </div>
       {error && (
         <h2 className={styles.cardsError}>Sorry! Wrong request. Try type any character name.</h2>
       )}
-      {!cardLoaded && <div className={styles.cardsLoader} />}
+      {!error && !cardLoaded && <div className={styles.cardsLoader} />}
       <div className={styles.cardsWrapper} style={{ opacity: cardLoaded ? 1 : 0 }}>
         {cardData &&
           !error &&
           cardData.results.map((data) => (
-            <Card key={data.id} data={data} handleImageLoad={handleImageLoad} />
+            <Card key={`${data.id}_${cardKey}`} data={data} handleImageLoad={handleImageLoad} />
           ))}
       </div>
     </>

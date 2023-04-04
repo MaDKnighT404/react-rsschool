@@ -3,10 +3,10 @@ import { CardData } from '../types/types';
 
 const useFetch = (
   url: string
-): { data: CardData | null; arrLength: number; isPending: boolean; error: Error | null } => {
+): { data: CardData | null; arrLength: number; error: Error | null } => {
   const [data, setData] = useState(null);
   const [arrLength, setArrLength] = useState(0);
-  const [isPending, setIsPending] = useState(true);
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,16 +20,14 @@ const useFetch = (
       .then((data) => {
         setData(data);
         setArrLength(data.results.length);
-        setIsPending(false);
         setError(null);
       })
       .catch((err) => {
-        setIsPending(false);
         setError(err.message);
       });
   }, [url]);
 
-  return { data, arrLength, isPending, error };
+  return { data, arrLength, error };
 };
 
 export default useFetch;

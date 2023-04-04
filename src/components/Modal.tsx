@@ -14,10 +14,10 @@ const Modal: React.FC<ModalProps & CardProps> = ({ close, data }) => {
   });
 
   return (
-    <div className={styles.modalWrapper} onClick={close}>
+    <div className={styles.modalWrapper} onClick={close} data-testid="modal">
       <div className={styles.modalInner} onClick={stopPropagation}>
         <img className={styles.modalClip} src="../assets/clip.png" alt="clip"></img>
-        <button className={styles.modalCloseBtn} onClick={close}>
+        <button className={styles.modalCloseBtn} onClick={close} data-testid="closeModal">
           X
         </button>
         <div className={styles.modalImgWrapper}>
