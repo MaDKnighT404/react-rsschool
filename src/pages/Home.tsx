@@ -50,7 +50,6 @@ const Home = () => {
     if (numImagesLoaded === numberOfCards && numberOfCards > 0) {
       setCardLoaded(true);
     }
-    console.log(numImagesLoaded);
   }, [numImagesLoaded, numberOfCards]);
 
   return (

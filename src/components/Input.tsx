@@ -47,11 +47,10 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
         />
       </div>
       <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} />
-      <p
+      <div
         className={styles.inputHint}
         style={{
           position: showHint ? 'relative' : 'absolute',
-          // visibility: showHint ? 'hidden' : 'visible',
           display: showHint ? 'block' : 'none',
         }}
       >
@@ -67,7 +66,7 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
             Gender: filter by the given gender (female, male, genderless or unknown)
           </li>
         </ul>
-      </p>
+      </div>
     </div>
   );
 };
