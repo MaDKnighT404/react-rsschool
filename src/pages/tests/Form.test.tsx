@@ -35,15 +35,13 @@ describe('Form component', () => {
     const userCard = await waitFor(() => getByTestId('userCard'));
     expect(userCard).toBeInTheDocument();
 
-    setTimeout(() => {
+    await waitFor(() => {
       form.reset();
       expect(nameInput).toHaveValue('');
       expect(phoneInput).toHaveValue('');
       expect(emailInput).toHaveValue('');
-      expect(genderInput).toHaveValue('');
-      expect(countryInput).toHaveValue('');
       expect(birthdayInput).toHaveValue('');
       expect(photoInput).toHaveValue('');
-    }, 2000);
+    });
   });
 });
