@@ -50,9 +50,9 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
       <p
         className={styles.inputHint}
         style={{
-          position: showHint ? 'absolute' : 'relative',
+          position: showHint ? 'relative' : 'absolute',
           // visibility: showHint ? 'hidden' : 'visible',
-          display: showHint ? 'none' : 'block',
+          display: showHint ? 'block' : 'none',
         }}
       >
         <h4 className={styles.inputHintTitle}>Available parameters for searching:</h4>

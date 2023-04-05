@@ -5,6 +5,11 @@ export const queryParams = {
     Beth: 'beth',
     Jerry: 'jerry',
     Summer: 'summer',
+    Birdperson: 'birdperson',
+    Squanchy: 'squanchy',
+    Poopybutthole: 'poopybutthole',
+    President: 'president',
+    Terry: 'terry',
   },
   status: {
     Alive: 'alive',

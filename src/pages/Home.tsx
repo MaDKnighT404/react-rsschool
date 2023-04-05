@@ -29,14 +29,18 @@ const Home = () => {
     });
 
     setCardKey((cardKey) => cardKey + 1);
-    setQuery(`name=${name}&status=${status}&gender=${gender}`);
+    if (!name && !status && !gender) {
+      setQuery(`error`);
+    } else {
+      setQuery(`?name=${name}&status=${status}&gender=${gender}`);
+    }
   };
 
   const {
     data: cardData,
     arrLength: numberOfCards,
     error,
-  } = useFetch(`https://rickandmortyapi.com/api/character/?${query}`);
+  } = useFetch(`https://rickandmortyapi.com/api/character/${query}`);
 
   const handleImageLoad = () => {
     setNumImagesLoaded((prevNumImagesLoaded) => prevNumImagesLoaded + 1);
