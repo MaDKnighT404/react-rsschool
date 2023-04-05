@@ -59,7 +59,10 @@ const Home = () => {
         />
       </div>
       {error && (
-        <h2 className={styles.cardsError}>Sorry! Wrong request. Try type any character name.</h2>
+        <h2 className={styles.cardsError}>
+          Sorry! Wrong request. Try type any character name, status or gender. You can combine this
+          parametrs.
+        </h2>
       )}
       {!error && !cardLoaded && <div className={styles.cardsLoader} />}
       <div className={styles.cardsWrapper} style={{ opacity: cardLoaded ? 1 : 0 }}>

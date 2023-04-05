@@ -35,7 +35,7 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
   };
 
   return (
-    <>
+    <div className={styles.inputWrapper}>
       <div className={styles.inputContainer}>
         <AiOutlineSearch className={styles.inputIcon} />
         <input
@@ -45,12 +45,30 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} />
       </div>
-      <p className={styles.inputHint} style={{ opacity: showHint ? 0 : 1 }}>
-        123
+      <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} />
+      <p
+        className={styles.inputHint}
+        style={{
+          position: showHint ? 'absolute' : 'relative',
+          // visibility: showHint ? 'hidden' : 'visible',
+          display: showHint ? 'none' : 'block',
+        }}
+      >
+        <h4 className={styles.inputHintTitle}>Available parameters for searching:</h4>
+        <ul className={styles.inputHintList}>
+          <li className={styles.inputHintItem}>
+            Name: filter by the given name(Rick, Morty, Beth and others).
+          </li>
+          <li className={styles.inputHintItem}>
+            Status: filter by the given status (alive, dead or unknown)
+          </li>
+          <li className={styles.inputHintItem}>
+            Gender: filter by the given gender (female, male, genderless or unknown)
+          </li>
+        </ul>
       </p>
-    </>
+    </div>
   );
 };
 

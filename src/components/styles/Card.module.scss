@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 310px;
+  height: 330px;
   background: rgb(224, 223, 223);
   border-radius: 15px;
   position: relative;
   transition: 0.1s ease-in;
   box-shadow: 0px 0px 11px 5px rgba(6, 42, 223, 0.398) inset;
+  user-select: none;
   cursor: pointer;
 
   &:hover {
