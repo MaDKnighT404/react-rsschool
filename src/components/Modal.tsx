@@ -40,6 +40,13 @@ const Modal: React.FC<ModalProps & CardProps> = ({ close, data }) => {
             <span className={styles.modalDetailValue}>{data.species}</span>
           </li>
 
+          {data.type && (
+            <li className={styles.modalDetailItem}>
+              <span className={styles.modalDetailNam}>Type:</span>
+              <span className={styles.modalDetailValue}>{data.type}</span>
+            </li>
+          )}
+
           <li className={styles.modalDetailItem}>
             <span className={styles.modalDetailName}>Gender:</span>
             <span className={styles.modalDetailValue}>{data.gender}</span>

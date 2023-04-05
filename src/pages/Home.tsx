@@ -2,21 +2,41 @@ import { Card, Input } from '../components/';
 import styles from './styles/Home.module.scss';
 import useFetch from '../helpers/useFetch';
 import { useEffect, useState } from 'react';
+import { queryParams } from '../data/queryParams';
 
 const Home = () => {
   const [query, setQuery] = useState('');
   const [cardLoaded, setCardLoaded] = useState(false);
   const [numImagesLoaded, setNumImagesLoaded] = useState(0);
   const [cardKey, setCardKey] = useState(0);
+
   const handleSearch = (value: string) => {
-    setQuery(value);
+    const parts = value.split(' ');
+    let name = '';
+    let status = '';
+    let gender = '';
+
+    parts.forEach((element) => {
+      if (Object.values(queryParams.name).find((val) => val === element)) {
+        name = element;
+      }
+      if (Object.values(queryParams.status).find((val) => val === element)) {
+        status = element;
+      }
+      if (Object.values(queryParams.gender).find((val) => val === element)) {
+        gender = element;
+      }
+    });
+
+    setCardKey((cardKey) => cardKey + 1);
+    setQuery(`name=${name}&status=${status}&gender=${gender}`);
   };
 
   const {
     data: cardData,
     arrLength: numberOfCards,
     error,
-  } = useFetch(`https://rickandmortyapi.com/api/character/?name=${query}`);
+  } = useFetch(`https://rickandmortyapi.com/api/character/?${query}`);
 
   const handleImageLoad = () => {
     setNumImagesLoaded((prevNumImagesLoaded) => prevNumImagesLoaded + 1);
@@ -26,11 +46,8 @@ const Home = () => {
     if (numImagesLoaded === numberOfCards && numberOfCards > 0) {
       setCardLoaded(true);
     }
+    console.log(numImagesLoaded);
   }, [numImagesLoaded, numberOfCards]);
-
-  useEffect(() => {
-    setCardKey((cardKey) => cardKey + 1);
-  }, [query]);
 
   return (
     <>
