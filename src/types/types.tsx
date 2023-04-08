@@ -27,10 +27,6 @@ export interface UserFormProps {
   onSubmit: (formData: FormValues[]) => void;
 }
 
-export interface UserCardProps {
-  data: FormValues;
-}
-
 export interface CardProps {
   data: ServerAnswer;
   handleImageLoad?: () => void;

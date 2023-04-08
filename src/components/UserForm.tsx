@@ -1,21 +1,21 @@
-import type { RootState } from '../redux/store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
-import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
 import { FormValues } from '../types/types';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
 import styles from './styles/UserForm.module.scss';
+import type { RootState } from '../redux/store/store';
 
 interface UserFormProps {
   submitData: (formData: FormValues) => void;
 }
 
 const UserForm = ({ submitData }: UserFormProps) => {
-  const defaultValues = useSelector(selectFormValues);
   const dispatch = useDispatch();
+  const { photoName, ...defaultValues } = useSelector(selectFormValues);
+
   const {
     register,
     handleSubmit,
@@ -28,8 +28,6 @@ const UserForm = ({ submitData }: UserFormProps) => {
   const onSubmit = (data: FormValues) => {
     submitData(data);
   };
-  const photoName = useSelector((state: RootState) => state.form.photoName);
-  console.log(useSelector((state) => state.form));
 
   return (
     <form className={styles.form} data-testid="form" onSubmit={handleSubmit(onSubmit)}>

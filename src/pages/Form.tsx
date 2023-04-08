@@ -17,8 +17,7 @@ const Form = () => {
         <UserForm submitData={handleFormSubmit} />
       </div>
       <div className={styles.userCardsWrapper}>
-        {cardDataArray.length > 0 &&
-          cardDataArray.map((data, i) => <UserCard key={i} data={data} />)}
+        {cardDataArray.length > 0 && cardDataArray.map((data) => <UserCard key={data.email} />)}
       </div>
     </>
   );
