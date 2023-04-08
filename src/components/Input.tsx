@@ -7,9 +7,10 @@ interface InputProps {
   onSearch: (value: string) => void;
   setCardLoaded: (value: boolean) => void;
   setNumImagesLoaded: (value: number) => void;
+  setPageUpload: (value: boolean) => void;
 }
 
-const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
+const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded, setPageUpload }: InputProps) => {
   const [value, setValue] = useState(() => localStorage.getItem('inputValue') || '');
   const [showHint, setShowHint] = useState(false);
 
@@ -30,7 +31,9 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded }: InputProps) => {
       setValue('');
       setNumImagesLoaded(0);
       setCardLoaded(false);
+      setPageUpload(false);
       onSearch(value.toLowerCase());
+      setTimeout(() => setCardLoaded(true), 1);
     }
   };
 

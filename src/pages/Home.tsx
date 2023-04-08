@@ -6,9 +6,9 @@ import { queryParams } from '../data/queryParams';
 
 const Home = () => {
   const [query, setQuery] = useState('');
-  const [cardLoaded, setCardLoaded] = useState(false);
+  const [cardLoaded, setCardLoaded] = useState(true);
+  const [pageUpload, setPageUpload] = useState(false);
   const [numImagesLoaded, setNumImagesLoaded] = useState(0);
-  const [cardKey, setCardKey] = useState(0);
 
   const handleSearch = (value: string) => {
     const parts = value.split(' ');
@@ -28,7 +28,6 @@ const Home = () => {
       }
     });
 
-    setCardKey((cardKey) => cardKey + 1);
     if (!name && !status && !gender) {
       setQuery(`error`);
     } else {
@@ -49,6 +48,7 @@ const Home = () => {
   useEffect(() => {
     if (numImagesLoaded === numberOfCards && numberOfCards > 0) {
       setCardLoaded(true);
+      setPageUpload(true);
     }
   }, [numImagesLoaded, numberOfCards]);
 
@@ -59,6 +59,7 @@ const Home = () => {
           onSearch={handleSearch}
           setCardLoaded={setCardLoaded}
           setNumImagesLoaded={setNumImagesLoaded}
+          setPageUpload={setPageUpload}
         />
       </div>
       {error && (
@@ -67,12 +68,13 @@ const Home = () => {
           parametrs.
         </h2>
       )}
-      {!error && !cardLoaded && <div className={styles.cardsLoader} />}
-      <div className={styles.cardsWrapper} style={{ opacity: cardLoaded ? 1 : 0 }}>
+      {!error && !pageUpload && <div className={styles.cardsLoader} />}
+      <div className={styles.cardsWrapper} style={{ opacity: pageUpload ? 1 : 0 }}>
         {cardData &&
           !error &&
+          cardLoaded &&
           cardData.results.map((data) => (
-            <Card key={`${data.id}_${cardKey}`} data={data} handleImageLoad={handleImageLoad} />
+            <Card key={data.id} data={data} handleImageLoad={handleImageLoad} />
           ))}
       </div>
     </>
