@@ -1,6 +1,10 @@
+import type { RootState } from '../redux/store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
+import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFileDownload } from 'react-icons/Fa';
-import { FormValues } from 'types/types';
+import { FormValues } from '../types/types';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
 import styles from './styles/UserForm.module.scss';
@@ -10,40 +14,22 @@ interface UserFormProps {
 }
 
 const UserForm = ({ submitData }: UserFormProps) => {
+  const defaultValues = useSelector(selectFormValues);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
-    getValues,
-    watch,
-    reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
-    defaultValues: {
-      fullName: '',
-      phone: '',
-      email: '',
-      birthday: '',
-      gender: '',
-      country: '',
-      photo: undefined,
-      html: false,
-      css: false,
-      javascript: false,
-      typescript: false,
-      jest: false,
-      react: false,
-      notification: false,
-    },
-    reValidateMode: 'onSubmit',
-    resolver: yupResolver(validationSchema),
+    defaultValues,
+    // resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = (data: FormValues) => {
     submitData(data);
-    setTimeout(() => {
-      reset();
-    }, 2000);
   };
+  const photoName = useSelector((state: RootState) => state.form.photoName);
+  console.log(useSelector((state) => state.form));
 
   return (
     <form className={styles.form} data-testid="form" onSubmit={handleSubmit(onSubmit)}>
@@ -55,10 +41,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
           className={styles.formInputText}
           id="name"
           type="text"
-          {...register('fullName')}
           data-testid="nameInput"
           placeholder="John Wick"
           title="Two words. Each word at least 3 letters.First letter must be capitalized"
+          {...register('fullName')}
+          onChange={(e) => dispatch(updateFormValue({ key: 'fullName', value: e.target.value }))}
         />
         <p className={styles.formError}>{errors.fullName?.message}</p>
 
@@ -67,10 +54,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
           className={styles.formInputText}
           id="phone"
           type="text"
-          {...register('phone')}
           placeholder="+79001001005"
           data-testid="phoneInput"
           title="First character is + Minimum 10 digits"
+          {...register('phone')}
+          onChange={(e) => dispatch(updateFormValue({ key: 'phone', value: e.target.value }))}
         />
         <p className={styles.formError}>{errors.phone?.message}</p>
 
@@ -82,10 +70,10 @@ const UserForm = ({ submitData }: UserFormProps) => {
           {...register('email')}
           data-testid="emailInput"
           placeholder="example@ex.com"
+          onChange={(e) => dispatch(updateFormValue({ key: 'email', value: e.target.value }))}
         />
         <p className={styles.formError}>{errors.email?.message}</p>
       </fieldset>
-
       <fieldset className={styles.formFieldset}>
         <legend>Personal information</legend>
 
@@ -96,9 +84,10 @@ const UserForm = ({ submitData }: UserFormProps) => {
               className={styles.formInputGender}
               type="radio"
               id="female"
-              {...register('gender')}
               value="female"
               data-testid="femaleInput"
+              {...register('gender')}
+              onChange={(e) => dispatch(updateFormValue({ key: 'gender', value: e.target.value }))}
             />
             <label htmlFor="female" className={styles.formGenderLabel}>
               Female
@@ -109,9 +98,10 @@ const UserForm = ({ submitData }: UserFormProps) => {
               className={styles.formInputGender}
               type="radio"
               id="male"
-              {...register('gender')}
               value="male"
               data-testid="maleInput"
+              {...register('gender')}
+              onChange={(e) => dispatch(updateFormValue({ key: 'gender', value: e.target.value }))}
             />
             <label htmlFor="male" className={styles.formGenderLabel}>
               Male
@@ -124,18 +114,20 @@ const UserForm = ({ submitData }: UserFormProps) => {
         <input
           className={styles.formInputDate}
           id="birthday"
-          {...register('birthday')}
           type="date"
           data-testid="birthdayInput"
+          {...register('birthday')}
+          onChange={(e) => dispatch(updateFormValue({ key: 'birthday', value: e.target.value }))}
         />
         <p className={styles.formError}>{errors.birthday?.message}</p>
         <span className={styles.formLabel}>Country:</span>
         <select
           className={styles.formInputSelect}
           id="country"
-          {...register('country')}
           data-testid="countryInput"
           defaultValue={'select'}
+          {...register('country')}
+          onChange={(e) => dispatch(updateFormValue({ key: 'country', value: e.target.value }))}
         >
           <option value="" disabled>
             Select your country
@@ -157,20 +149,27 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formInputFile}
             id="photo"
             type="file"
-            {...register('photo')}
             accept="image/png, image/jpeg"
             data-testid="photoInput"
+            {...register('photoURL')}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+
+              if (file) {
+                const fileUrl = URL.createObjectURL(file);
+                dispatch(updateFormValue({ key: 'photoURL', value: fileUrl }));
+                dispatch(updateFormValue({ key: 'photoName', value: file.name }));
+              }
+            }}
           />
           <label htmlFor="photo" className={styles.formInputFileInner}>
             <span className={styles.formInputFileBtn} data-testid="photoName">
-              {watch('photo') && getValues('photo')[0]
-                ? `${getValues('photo')[0].name}`
-                : 'Select your photo'}
+              {photoName ? photoName : 'Select your photo'}
             </span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>
         </div>
-        <p className={styles.formError}>{errors.photo?.message}</p>
+        <p className={styles.formError}>{errors.photoURL?.message}</p>
       </fieldset>
       <fieldset className={`${styles.formFieldset} ${styles.formFieldsetCheckbox}`}>
         <legend> Skills</legend>
@@ -180,8 +179,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="html"
             type="checkbox"
-            {...register('html')}
             data-testid="htmlInput"
+            {...register('html')}
+            onChange={(e) => dispatch(updateFormValue({ key: 'html', value: e.target.checked }))}
           />
           <label htmlFor="html" className={styles.formCheckboxLabel}>
             Html
@@ -192,8 +192,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="css"
             type="checkbox"
-            {...register('css')}
             data-testid="cssInput"
+            {...register('css')}
+            onChange={(e) => dispatch(updateFormValue({ key: 'css', value: e.target.checked }))}
           />
           <label htmlFor="css" className={styles.formCheckboxLabel}>
             Css
@@ -204,8 +205,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="javascript"
             type="checkbox"
-            {...register('javascript')}
             data-testid="javascriptInput"
+            {...register('javascript')}
+            onChange={(e) =>
+              dispatch(updateFormValue({ key: 'javascript', value: e.target.checked }))
+            }
           />
           <label htmlFor="javascript" className={styles.formCheckboxLabel}>
             javascript
@@ -216,8 +220,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="typescript"
             type="checkbox"
-            {...register('typescript')}
             data-testid="typescriptInput"
+            {...register('typescript')}
+            onChange={(e) =>
+              dispatch(updateFormValue({ key: 'typescript', value: e.target.checked }))
+            }
           />
           <label htmlFor="typescript" className={styles.formCheckboxLabel}>
             typescript
@@ -228,8 +235,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="jest"
             type="checkbox"
-            {...register('jest')}
             data-testid="jestInput"
+            {...register('jest')}
+            onChange={(e) => dispatch(updateFormValue({ key: 'jest', value: e.target.checked }))}
           />
           <label htmlFor="jest" className={styles.formCheckboxLabel}>
             Jest
@@ -240,8 +248,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
             className={styles.formCheckboxInput}
             id="react"
             type="checkbox"
-            {...register('react')}
             data-testid="reactInput"
+            {...register('react')}
+            onChange={(e) => dispatch(updateFormValue({ key: 'react', value: e.target.checked }))}
           />
           <label htmlFor="react" className={styles.formCheckboxLabel}>
             React
@@ -256,8 +265,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
         <input
           className={styles.formToggleRadio}
           type="checkbox"
-          {...register('notification')}
           data-testid="receivedInput"
+          {...register('notification')}
+          onChange={(e) =>
+            dispatch(updateFormValue({ key: 'notification', value: e.target.checked }))
+          }
         />
         <div className={styles.formToggleSwitch}></div>
       </label>
