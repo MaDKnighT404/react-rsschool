@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
 import styles from './styles/UserCard.module.scss';
@@ -13,7 +13,6 @@ const UserCard = () => {
     gender,
     country,
     photoURL,
-    photoName,
     html,
     css,
     javascript,
@@ -23,19 +22,10 @@ const UserCard = () => {
     notification,
   } = useSelector(selectFormValues);
 
-  const file = photoURL ? photoURL[0] : undefined;
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageSrc(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  }
-
   return (
     <div className={styles.userCard} data-testid="userCard">
       <figure className={styles.userCardFigure}>
-        <img src={imageSrc} alt="photoUrl" className={styles.userCardAvatar} data-testid="photo" />
+        <img src={photoURL} alt="photoUrl" className={styles.userCardAvatar} data-testid="photo" />
         <figcaption className={styles.userCardName}>{fullName}</figcaption>
       </figure>
       <ul className={styles.userCardBody}>

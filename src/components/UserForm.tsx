@@ -19,6 +19,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
     defaultValues,
@@ -27,6 +28,9 @@ const UserForm = ({ submitData }: UserFormProps) => {
 
   const onSubmit = (data: FormValues) => {
     submitData(data);
+    setTimeout(() => {
+      reset();
+    }, 2000);
   };
 
   return (
