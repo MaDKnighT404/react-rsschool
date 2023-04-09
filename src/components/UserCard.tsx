@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { FormValues } from '../types/types';
-import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
 import styles from './styles/UserCard.module.scss';
 
 interface DataFormValues {
-  card: FormValues;
+  data: FormValues;
 }
 
 const UserCard = (card: DataFormValues) => {
@@ -25,7 +22,7 @@ const UserCard = (card: DataFormValues) => {
     jest,
     react,
     notification,
-  } = card.card;
+  } = card.data;
 
   return (
     <div className={styles.userCard} data-testid="userCard">

@@ -1,5 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { selectFormValues, updateFormValue, createNewUserCard } from '../redux/features/formSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import {
+  selectFormValues,
+  updateFormValue,
+  createNewUserCard,
+  resetForm,
+} from '../redux/features/formSlice';
 import { FaFileDownload } from 'react-icons/Fa';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../helpers/validationSchema';
@@ -8,8 +13,9 @@ import { FormValues } from '../types/types';
 import styles from './styles/UserForm.module.scss';
 
 const UserForm = () => {
-  const dispatch = useDispatch();
-  const { ...state } = useSelector(selectFormValues);
+  const dispatch = useAppDispatch();
+  const { ...state } = useAppSelector(selectFormValues);
+
   const {
     register,
     handleSubmit,
@@ -18,13 +24,14 @@ const UserForm = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
     defaultValues: state,
-    // resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = () => {
     dispatch(createNewUserCard(state));
     setTimeout(() => {
       reset();
+      dispatch(resetForm());
       dispatch(updateFormValue({ key: 'photoName', value: '' }));
     }, 1600);
   };
