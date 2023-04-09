@@ -1,36 +1,31 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { selectFormValues, updateFormValue, createNewUserCard } from '../redux/features/formSlice';
 import { FaFileDownload } from 'react-icons/Fa';
-import { FormValues } from '../types/types';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
+import { FormValues } from '../types/types';
 import styles from './styles/UserForm.module.scss';
-import type { RootState } from '../redux/store/store';
 
-interface UserFormProps {
-  submitData: (formData: FormValues) => void;
-}
-
-const UserForm = ({ submitData }: UserFormProps) => {
+const UserForm = () => {
   const dispatch = useDispatch();
-  const { photoName, ...defaultValues } = useSelector(selectFormValues);
-
+  const { ...state } = useSelector(selectFormValues);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
-    defaultValues,
-    // resolver: yupResolver(validationSchema),
+    defaultValues: state,
+    resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: FormValues) => {
-    submitData(data);
+  const onSubmit = () => {
+    dispatch(createNewUserCard(state));
     setTimeout(() => {
       reset();
-    }, 2000);
+      dispatch(updateFormValue({ key: 'photoName', value: '' }));
+    }, 1600);
   };
 
   return (
@@ -89,7 +84,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
               value="female"
               data-testid="femaleInput"
               {...register('gender')}
-              onChange={(e) => dispatch(updateFormValue({ key: 'gender', value: e.target.value }))}
+              onClick={(e) =>
+                dispatch(
+                  updateFormValue({ key: 'gender', value: (e.target as HTMLInputElement).value })
+                )
+              }
             />
             <label htmlFor="female" className={styles.formGenderLabel}>
               Female
@@ -103,7 +102,11 @@ const UserForm = ({ submitData }: UserFormProps) => {
               value="male"
               data-testid="maleInput"
               {...register('gender')}
-              onChange={(e) => dispatch(updateFormValue({ key: 'gender', value: e.target.value }))}
+              onClick={(e) =>
+                dispatch(
+                  updateFormValue({ key: 'gender', value: (e.target as HTMLInputElement).value })
+                )
+              }
             />
             <label htmlFor="male" className={styles.formGenderLabel}>
               Male
@@ -166,7 +169,7 @@ const UserForm = ({ submitData }: UserFormProps) => {
           />
           <label htmlFor="photo" className={styles.formInputFileInner}>
             <span className={styles.formInputFileBtn} data-testid="photoName">
-              {photoName ? photoName : 'Select your photo'}
+              {state.photoName ? state.photoName : 'Select your photo'}
             </span>
             <FaFileDownload className={styles.formInputFileIcon} />
           </label>

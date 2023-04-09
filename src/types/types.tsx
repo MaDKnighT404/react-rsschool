@@ -14,6 +14,7 @@ export interface FormValues {
   jest: boolean;
   react: boolean;
   notification: boolean;
+  userCards: Array<FormValues>;
 }
 
 export interface UserFormState {

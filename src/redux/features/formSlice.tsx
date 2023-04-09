@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FormValues } from 'types/types';
 import { RootState } from '../store/store';
-import produce, { Draft } from 'immer';
+import { Draft } from 'immer';
 
 const initialState: FormValues = {
   fullName: '',
@@ -10,7 +10,7 @@ const initialState: FormValues = {
   birthday: '',
   gender: '',
   country: '',
-  photoURL: null,
+  photoURL: '',
   photoName: '',
   html: false,
   css: false,
@@ -19,11 +19,12 @@ const initialState: FormValues = {
   jest: false,
   react: false,
   notification: false,
+  userCards: [],
 };
 
 interface UpdateFormValuePayload {
   key: keyof FormValues;
-  value: string | boolean | File;
+  value: string | boolean;
 }
 
 const formSlice = createSlice({
@@ -34,12 +35,15 @@ const formSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value as never;
     },
+    createNewUserCard: (state: FormValues, action: PayloadAction<FormValues>) => {
+      state.userCards.push(action.payload);
+    },
     resetForm: (state) => {
       return initialState;
     },
   },
 });
 
-export const { updateFormValue, resetForm } = formSlice.actions;
+export const { updateFormValue, createNewUserCard, resetForm } = formSlice.actions;
 export const selectFormValues = (state: RootState) => state.form;
 export const formReducer = formSlice.reducer;

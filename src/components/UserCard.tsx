@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FormValues } from '../types/types';
 import { selectFormValues, updateFormValue } from '../redux/features/formSlice';
 import styles from './styles/UserCard.module.scss';
 
-const UserCard = () => {
-  const [imageSrc, setImageSrc] = useState<string>('');
+interface DataFormValues {
+  card: FormValues;
+}
+
+const UserCard = (card: DataFormValues) => {
   const {
     fullName,
     phone,
@@ -13,6 +17,7 @@ const UserCard = () => {
     gender,
     country,
     photoURL,
+    photoName,
     html,
     css,
     javascript,
@@ -20,12 +25,12 @@ const UserCard = () => {
     jest,
     react,
     notification,
-  } = useSelector(selectFormValues);
+  } = card.card;
 
   return (
     <div className={styles.userCard} data-testid="userCard">
       <figure className={styles.userCardFigure}>
-        <img src={photoURL} alt="photoUrl" className={styles.userCardAvatar} data-testid="photo" />
+        <img src={photoURL} alt={photoName} className={styles.userCardAvatar} data-testid="photo" />
         <figcaption className={styles.userCardName}>{fullName}</figcaption>
       </figure>
       <ul className={styles.userCardBody}>

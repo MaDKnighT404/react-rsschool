@@ -1,23 +1,19 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import UserForm from '../components/UserForm';
 import UserCard from '../components/UserCard';
+import { selectFormValues } from '../redux/features/formSlice';
 import styles from './styles/Form.module.scss';
-import { FormValues } from 'types/types';
 
 const Form = () => {
-  const [cardDataArray, setCardDataArray] = useState<FormValues[]>([]);
-  const handleFormSubmit = (formData: FormValues) => {
-    const newCardData = { ...formData };
-    setCardDataArray((prevState) => [...prevState, newCardData]);
-  };
+  const { userCards } = useSelector(selectFormValues);
 
   return (
     <>
       <div className={styles.formWrapper}>
-        <UserForm submitData={handleFormSubmit} />
+        <UserForm />
       </div>
       <div className={styles.userCardsWrapper}>
-        {cardDataArray.length > 0 && cardDataArray.map((data) => <UserCard key={data.email} />)}
+        {userCards.length > 0 && userCards.map((card, i) => <UserCard key={i} card={card} />)}
       </div>
     </>
   );
