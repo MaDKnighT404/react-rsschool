@@ -27,7 +27,7 @@ export const validationSchema = yup
       .max(today, "Birthday cannot be less than today's date")
       .typeError('Please enter your birthday'),
     country: yup.string().required('Please select your country'),
-    photo: yup
+    photoURL: yup
       .mixed<FileList>()
       .test('required', 'Please select your photo', (files) => files && files.length > 0),
   })

@@ -14,6 +14,7 @@ const UserForm = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
     defaultValues: state,
@@ -159,10 +160,10 @@ const UserForm = () => {
             {...register('photoURL')}
             onChange={(e) => {
               const file = e.target.files?.[0];
-
+              setValue('photoURL', 'change');
               if (file) {
-                const fileUrl = URL.createObjectURL(file);
-                dispatch(updateFormValue({ key: 'photoURL', value: fileUrl }));
+                const fileURL = URL.createObjectURL(file);
+                dispatch(updateFormValue({ key: 'photoURL', value: fileURL }));
                 dispatch(updateFormValue({ key: 'photoName', value: file.name }));
               }
             }}
