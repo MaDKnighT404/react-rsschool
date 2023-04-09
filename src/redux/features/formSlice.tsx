@@ -39,8 +39,9 @@ const formSlice = createSlice({
       state.userCards.push(action.payload);
     },
     resetForm: (state: Draft<FormValues>) => {
-      const { userCards, ...rest } = initialState;
-      Object.assign(rest, state);
+      const { userCards } = state;
+      Object.assign(state, initialState);
+      state.userCards = userCards;
     },
   },
 });
