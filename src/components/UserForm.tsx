@@ -18,7 +18,7 @@ const UserForm = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormValues>({
     defaultValues: state,
-    resolver: yupResolver(validationSchema),
+    // resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = () => {
