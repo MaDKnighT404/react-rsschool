@@ -17,17 +17,6 @@ export interface FormValues {
   userCards: Array<FormValues>;
 }
 
-export interface UserFormState {
-  values: FormValues;
-  errors: Partial<Record<keyof FormValues, string>>;
-  cardsArray: FormValues[];
-  submitted: boolean;
-}
-
-export interface UserFormProps {
-  onSubmit: (formData: FormValues[]) => void;
-}
-
 export interface CardProps {
   data: ServerAnswer;
   handleImageLoad?: () => void;
@@ -52,10 +41,6 @@ export interface ServerAnswer {
   episode: string[];
   url: string;
   created: string;
-}
-
-export interface FormState {
-  formData: FormValues[];
 }
 
 export interface CardData {
