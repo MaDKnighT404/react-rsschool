@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FormValues } from 'types/types';
 import { RootState } from '../store/store';
-import { Draft } from 'immer';
 
 const initialState: FormValues = {
   fullName: '',
@@ -31,14 +30,14 @@ const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    updateFormValue: (state: Draft<FormValues>, action: PayloadAction<UpdateFormValuePayload>) => {
+    updateFormValue: (state: FormValues, action: PayloadAction<UpdateFormValuePayload>) => {
       const { key, value } = action.payload;
       state[key] = value as never;
     },
     createNewUserCard: (state: FormValues, action: PayloadAction<FormValues>) => {
       state.userCards.push(action.payload);
     },
-    resetForm: (state: Draft<FormValues>) => {
+    resetForm: (state: FormValues) => {
       const { userCards } = state;
       Object.assign(state, initialState);
       state.userCards = userCards;
