@@ -5,12 +5,9 @@ import styles from './styles/Input.module.scss';
 
 interface InputProps {
   onSearch: (value: string) => void;
-  setCardLoaded: (value: boolean) => void;
-  setNumImagesLoaded: (value: number) => void;
-  setPageUpload: (value: boolean) => void;
 }
 
-const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded, setPageUpload }: InputProps) => {
+const Input = ({ onSearch }: InputProps) => {
   const [value, setValue] = useState(() => localStorage.getItem('inputValue') || '');
   const [showHint, setShowHint] = useState(false);
 
@@ -29,11 +26,7 @@ const Input = ({ onSearch, setCardLoaded, setNumImagesLoaded, setPageUpload }: I
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && value) {
       setValue('');
-      setNumImagesLoaded(0);
-      setCardLoaded(false);
-      setPageUpload(false);
       onSearch(value.toLowerCase());
-      setTimeout(() => setCardLoaded(true), 1);
     }
   };
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FormValues } from 'types/types';
-import { RootState } from '../store/store';
+import { RootState } from '../../store/store';
 
 const initialState: FormValues = {
   fullName: '',

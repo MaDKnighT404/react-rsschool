@@ -1,7 +1,7 @@
 import UserForm from '../components/UserForm';
 import UserCard from '../components/UserCard';
 import { useAppSelector } from '../redux/hooks';
-import { selectFormValues } from '../redux/features/formSlice';
+import { selectFormValues } from '../redux/features/form/formSlice';
 import styles from './styles/Form.module.scss';
 
 const Form = () => {

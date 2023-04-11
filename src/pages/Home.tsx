@@ -1,14 +1,13 @@
 import { Card, Input } from '../components/';
 import styles from './styles/Home.module.scss';
-import useFetch from '../helpers/useFetch';
 import { useEffect, useState } from 'react';
 import { queryParams } from '../data/queryParams';
+import { useGetCardByNameQuery } from '../redux/features/card/cardsApi';
 
 const Home = () => {
   const [query, setQuery] = useState('');
-  const [cardLoaded, setCardLoaded] = useState(true);
-  const [pageUpload, setPageUpload] = useState(false);
-  const [numImagesLoaded, setNumImagesLoaded] = useState(0);
+
+  const { data, error: apiError, isLoading } = useGetCardByNameQuery('');
 
   const handleSearch = (value: string) => {
     const parts = value.split(' ');
@@ -35,47 +34,20 @@ const Home = () => {
     }
   };
 
-  const {
-    data: cardData,
-    arrLength: numberOfCards,
-    error,
-  } = useFetch(`https://rickandmortyapi.com/api/character/${query}`);
-
-  const handleImageLoad = () => {
-    setNumImagesLoaded((prevNumImagesLoaded) => prevNumImagesLoaded + 1);
-  };
-
-  useEffect(() => {
-    if (numImagesLoaded === numberOfCards && numberOfCards > 0) {
-      setCardLoaded(true);
-      setPageUpload(true);
-    }
-  }, [numImagesLoaded, numberOfCards]);
-
   return (
     <>
       <div className={styles.inputWrapper}>
-        <Input
-          onSearch={handleSearch}
-          setCardLoaded={setCardLoaded}
-          setNumImagesLoaded={setNumImagesLoaded}
-          setPageUpload={setPageUpload}
-        />
+        <Input onSearch={handleSearch} />
       </div>
-      {error && (
+      {apiError && (
         <h2 className={styles.cardsError}>
           Sorry! Wrong request. Try type any character name, status or gender. You can combine this
           parametrs.
         </h2>
       )}
-      {!error && !pageUpload && <div className={styles.cardsLoader} />}
-      <div className={styles.cardsWrapper} style={{ opacity: pageUpload ? 1 : 0 }}>
-        {cardData &&
-          !error &&
-          cardLoaded &&
-          cardData.results.map((data) => (
-            <Card key={data.id} data={data} handleImageLoad={handleImageLoad} />
-          ))}
+      {!apiError && isLoading && <div className={styles.cardsLoader} />}
+      <div className={styles.cardsWrapper}>
+        {data && !apiError && data.results.map((data) => <Card key={data.id} data={data} />)}
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import {
   updateFormValue,
   createNewUserCard,
   resetForm,
-} from '../redux/features/formSlice';
+} from '../redux/features/form/formSlice';
 import { FaFileDownload } from 'react-icons/Fa';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../helpers/validationSchema';

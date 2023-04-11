@@ -3,7 +3,7 @@ import { CardProps } from 'types/types';
 import styles from './styles/Card.module.scss';
 import Modal from './Modal';
 
-const Card = ({ data, handleImageLoad }: CardProps) => {
+const Card = ({ data }: CardProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleCardClick = () => {
@@ -18,12 +18,7 @@ const Card = ({ data, handleImageLoad }: CardProps) => {
     <>
       <div className={styles.card} onClick={handleCardClick}>
         <div className={styles.cardImgWrapper}>
-          <img
-            className={styles.cardImg}
-            src={data.image}
-            alt={data.name}
-            onLoad={handleImageLoad}
-          />
+          <img className={styles.cardImg} src={data.image} alt={data.name} />
           <span className={styles.cardStatus}>{data.status}</span>
         </div>
         <p className={styles.cardName}>{data.name}</p>

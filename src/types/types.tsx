@@ -19,7 +19,6 @@ export interface FormValues {
 
 export interface CardProps {
   data: ServerAnswer;
-  handleImageLoad?: () => void;
 }
 
 export interface ServerAnswer {
