@@ -1,19 +1,18 @@
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-
-import { AiOutlineSearch } from 'react-icons/Ai';
-import { AiOutlineQuestionCircle } from 'react-icons/Ai';
 import { useState, ChangeEvent } from 'react';
-import styles from './styles/Input.module.scss';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { selectInputValue, changeValue } from '../redux/features/input/inputSlice';
+import { AiOutlineSearch, AiOutlineQuestionCircle } from 'react-icons/Ai';
+import styles from './styles/Input.module.scss';
 
 interface InputProps {
   onSearch: (value: string) => void;
 }
 
 const Input = ({ onSearch }: InputProps) => {
+  const [showHint, setShowHint] = useState(false);
+
   const dispatch = useAppDispatch();
   const { ...state } = useAppSelector(selectInputValue);
-  const [showHint, setShowHint] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(changeValue(event.target.value));
@@ -28,6 +27,7 @@ const Input = ({ onSearch }: InputProps) => {
   const handleOnClick = () => {
     setShowHint(!showHint);
   };
+
   return (
     <div className={styles.inputWrapper}>
       <div className={styles.inputContainer}>

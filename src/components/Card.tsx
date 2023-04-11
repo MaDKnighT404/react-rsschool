@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CardProps } from 'types/types';
-import styles from './styles/Card.module.scss';
 import Modal from './Modal';
+import styles from './styles/Card.module.scss';
+import { CardProps } from 'types';
 
 const Card = ({ data }: CardProps) => {
   const [showModal, setShowModal] = useState(false);

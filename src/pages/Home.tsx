@@ -1,10 +1,9 @@
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { Card, Input } from '../components/';
-import styles from './styles/Home.module.scss';
-import { useState } from 'react';
 import { queryParams } from '../data/queryParams';
 import { useGetCardByNameQuery } from '../redux/features/card/cardsApi';
-import { selectInputValue, changeValue, setRequest } from '../redux/features/input/inputSlice';
+import { selectInputValue, setRequest } from '../redux/features/input/inputSlice';
+import styles from './styles/Home.module.scss';
 
 const Home = () => {
   const dispatch = useAppDispatch();

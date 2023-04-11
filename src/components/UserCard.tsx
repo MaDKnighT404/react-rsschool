@@ -1,5 +1,5 @@
-import { FormValues } from '../types/types';
 import styles from './styles/UserCard.module.scss';
+import { FormValues } from '../types';
 
 interface DataFormValues {
   data: FormValues;

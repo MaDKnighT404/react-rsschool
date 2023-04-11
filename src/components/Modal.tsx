@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/Modal.module.scss';
-import { CardProps, ModalProps } from '../types/types';
+import { CardProps, ModalProps } from '../types';
 
 const Modal: React.FC<ModalProps & CardProps> = ({ close, data }) => {
   const stopPropagation = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

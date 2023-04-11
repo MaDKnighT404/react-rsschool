@@ -9,7 +9,7 @@ import { FaFileDownload } from 'react-icons/Fa';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../helpers/validationSchema';
 import { useForm } from 'react-hook-form';
-import { FormValues } from '../types/types';
+import { FormValues } from '../types';
 import styles from './styles/UserForm.module.scss';
 
 const UserForm = () => {
