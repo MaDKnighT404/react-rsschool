@@ -6,7 +6,7 @@ export const cardsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api' }),
   endpoints: (builder) => ({
     getCardByName: builder.query<CardData, string>({
-      query: (name) => `character/?name=${name}`,
+      query: (query) => `character/${query}`,
     }),
   }),
 });

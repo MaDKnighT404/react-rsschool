@@ -7,7 +7,7 @@ import { useGetCardByNameQuery } from '../redux/features/card/cardsApi';
 const Home = () => {
   const [query, setQuery] = useState('');
 
-  const { data, error: apiError, isLoading } = useGetCardByNameQuery('');
+  const { data, error: apiError, isLoading } = useGetCardByNameQuery(query);
 
   const handleSearch = (value: string) => {
     const parts = value.split(' ');
