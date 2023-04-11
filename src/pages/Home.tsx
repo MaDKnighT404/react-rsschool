@@ -1,13 +1,16 @@
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { Card, Input } from '../components/';
 import styles from './styles/Home.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { queryParams } from '../data/queryParams';
 import { useGetCardByNameQuery } from '../redux/features/card/cardsApi';
+import { selectInputValue, changeValue, setRequest } from '../redux/features/input/inputSlice';
 
 const Home = () => {
-  const [query, setQuery] = useState('');
+  const dispatch = useAppDispatch();
+  const { ...state } = useAppSelector(selectInputValue);
 
-  const { data, error: apiError, isLoading } = useGetCardByNameQuery(query);
+  const { data, error: apiError, isLoading } = useGetCardByNameQuery(state.request);
 
   const handleSearch = (value: string) => {
     const parts = value.split(' ');
@@ -28,9 +31,9 @@ const Home = () => {
     });
 
     if (!name && !status && !gender) {
-      setQuery(`error`);
+      dispatch(setRequest('error'));
     } else {
-      setQuery(`?name=${name}&status=${status}&gender=${gender}`);
+      dispatch(setRequest(`?name=${name}&status=${status}&gender=${gender}`));
     }
   };
 

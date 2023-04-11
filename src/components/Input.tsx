@@ -1,41 +1,39 @@
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+
 import { AiOutlineSearch } from 'react-icons/Ai';
 import { AiOutlineQuestionCircle } from 'react-icons/Ai';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import styles from './styles/Input.module.scss';
+import { selectInputValue, changeValue } from '../redux/features/input/inputSlice';
 
 interface InputProps {
   onSearch: (value: string) => void;
 }
 
 const Input = ({ onSearch }: InputProps) => {
-  const [value, setValue] = useState(() => localStorage.getItem('inputValue') || '');
+  const dispatch = useAppDispatch();
+  const { ...state } = useAppSelector(selectInputValue);
   const [showHint, setShowHint] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('inputValue', value);
-  }, [value, setValue]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    dispatch(changeValue(event.target.value));
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && state.value) {
+      onSearch(state.value.toLowerCase());
+    }
   };
 
   const handleOnClick = () => {
     setShowHint(!showHint);
   };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && value) {
-      setValue('');
-      onSearch(value.toLowerCase());
-    }
-  };
-
   return (
     <div className={styles.inputWrapper}>
       <div className={styles.inputContainer}>
         <AiOutlineSearch className={styles.inputIcon} />
         <input
-          value={value}
+          value={state.value}
           placeholder="Search"
           className={styles.input}
           onChange={handleChange}
