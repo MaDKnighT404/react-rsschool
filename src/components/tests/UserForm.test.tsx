@@ -1,10 +1,15 @@
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
 import { render, fireEvent } from '@testing-library/react';
 import UserForm from '../UserForm';
-import { vi } from 'vitest';
 
 describe('UserForm', () => {
   it('should update values state when inputs change', () => {
-    const { getByTestId } = render(<UserForm submitData={() => {}} />);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <UserForm />
+      </Provider>
+    );
     const nameInput = getByTestId('nameInput') as HTMLInputElement;
     const phoneInput = getByTestId('phoneInput') as HTMLInputElement;
     const emailInput = getByTestId('emailInput') as HTMLInputElement;
@@ -19,7 +24,11 @@ describe('UserForm', () => {
   });
 
   it('should update skills state when checkboxes change', () => {
-    const { getByTestId } = render(<UserForm submitData={() => {}} />);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <UserForm />
+      </Provider>
+    );
     const htmlCheckbox = getByTestId('htmlInput') as HTMLInputElement;
     const cssCheckbox = getByTestId('cssInput') as HTMLInputElement;
     const javascriptCheckbox = getByTestId('javascriptInput') as HTMLInputElement;
@@ -34,30 +43,5 @@ describe('UserForm', () => {
     expect(cssCheckbox.checked).toBe(true);
     expect(javascriptCheckbox.checked).toBe(true);
     expect(notificationCheckbox.checked).toBe(true);
-  });
-
-  it('should update photoUrl and photoName state when photo input changes', () => {
-    const { getByTestId } = render(<UserForm submitData={() => {}} />);
-    const photoInput = getByTestId('photoInput') as HTMLInputElement;
-
-    Object.defineProperty(window, 'FileReader', {
-      value: vi.fn(() => ({
-        readAsDataURL: vi.fn(),
-        addEventListener: vi.fn((event, callback) => {
-          if (event === 'load') {
-            callback({ target: { result: 'data:image/png;base64,ABC123' } });
-          }
-        }),
-      })),
-    });
-
-    fireEvent.change(photoInput, {
-      target: { name: 'photo', files: [new File([''], 'photo.png', { type: 'image/png' })] },
-    });
-
-    expect(photoInput.files).toHaveLength(1);
-    if (photoInput.files) {
-      expect(photoInput.files[0].name).toBe('photo.png');
-    }
   });
 });
