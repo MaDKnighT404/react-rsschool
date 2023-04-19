@@ -38,6 +38,7 @@ const Input = ({ onSearch }: InputProps) => {
           className={styles.input}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          data-cy="input"
         />
       </div>
       <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} />

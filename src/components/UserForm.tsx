@@ -98,7 +98,7 @@ const UserForm = () => {
                 )
               }
             />
-            <label htmlFor="female" className={styles.formGenderLabel}>
+            <label htmlFor="female" className={styles.formGenderLabel} data-cy="femaleInput">
               Female
             </label>
           </div>
@@ -116,7 +116,7 @@ const UserForm = () => {
                 )
               }
             />
-            <label htmlFor="male" className={styles.formGenderLabel}>
+            <label htmlFor="male" className={styles.formGenderLabel} data-cy="maleInput">
               Male
             </label>
           </div>
@@ -175,7 +175,7 @@ const UserForm = () => {
               }
             }}
           />
-          <label htmlFor="photo" className={styles.formInputFileInner}>
+          <label htmlFor="photo" className={styles.formInputFileInner} data-cy="fileLabel">
             <span className={styles.formInputFileBtn} data-testid="photoName">
               {state.photoName ? state.photoName : 'Select your photo'}
             </span>
@@ -291,7 +291,7 @@ const UserForm = () => {
         Submit
       </button>
       {isSubmitSuccessful && (
-        <div className={styles.formSubmittedWrapper}>
+        <div className={styles.formSubmittedWrapper} data-cy='popupOk'>
           <div className={styles.formSubmittedInner}>
             <span className={styles.formSubmittedText}>Card successfully created!</span>
           </div>

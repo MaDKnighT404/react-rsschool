@@ -48,7 +48,7 @@ const Home = () => {
         </h2>
       )}
       {!apiError && isLoading && <div className={styles.cardsLoader} />}
-      <div className={styles.cardsWrapper}>
+      <div className={styles.cardsWrapper}  data-cy="cardsWrapper">
         {data && !apiError && data.results.map((data) => <Card key={data.id} data={data} />)}
       </div>
     </>
