@@ -17,9 +17,9 @@ const Header = () => {
   };
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.currentPage}>
-        {pathname === '/'
+        {pathname === '/' || pathname === ''
           ? 'Home page'
           : pathname === '/about'
           ? 'About page'
@@ -62,7 +62,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   );
 };
 

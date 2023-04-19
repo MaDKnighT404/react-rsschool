@@ -1,15 +1,17 @@
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
 import { render } from '@testing-library/react';
-import store from './redux/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import store from './redux/store';
 
-it('render App', async () => {
-  render(
-    <Provider store={store}>
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    </Provider>
-  );
+describe('App', () => {
+  test('renders successfully', () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    );
+  });
 });
