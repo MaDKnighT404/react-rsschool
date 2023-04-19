@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -6,6 +7,15 @@ import NotFound from './pages/NotFound';
 import Layout from './components/Layout';
 
 const App = () => {
+  const [isRenderComplete, setIsRenderComplete] = useState(false);
+
+  useEffect(() => {
+    setIsRenderComplete(true);
+  }, []);
+
+  if (!isRenderComplete) {
+    return null;
+  }
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
