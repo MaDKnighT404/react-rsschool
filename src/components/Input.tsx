@@ -31,7 +31,7 @@ const Input = ({ onSearch }: InputProps) => {
   return (
     <div className={styles.inputWrapper}>
       <div className={styles.inputContainer}>
-        <AiOutlineSearch className={styles.inputIcon} />
+        <AiOutlineSearch className={styles.inputIcon}  />
         <input
           value={state.value}
           placeholder="Search"
@@ -41,13 +41,14 @@ const Input = ({ onSearch }: InputProps) => {
           data-cy="input"
         />
       </div>
-      <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} />
+      <AiOutlineQuestionCircle className={styles.inputQuestion} onClick={handleOnClick} data-cy="hintBtn" />
       <div
         className={styles.inputHint}
         style={{
           position: showHint ? 'relative' : 'absolute',
           display: showHint ? 'block' : 'none',
         }}
+        data-cy="hint"
       >
         <h4 className={styles.inputHintTitle}>Available parameters for searching:</h4>
         <ul className={styles.inputHintList}>

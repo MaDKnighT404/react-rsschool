@@ -42,14 +42,18 @@ const Home = () => {
         <Input onSearch={handleSearch} />
       </div>
       {apiError && (
-        <h2 className={styles.cardsError}>
+        <h2 className={styles.cardsError} data-cy="cardsError">
           Sorry! Wrong request. Try type any character name, status or gender. You can combine this
           parametrs.
         </h2>
       )}
       {!apiError && isLoading && <div className={styles.cardsLoader} />}
-      <div className={styles.cardsWrapper}  data-cy="cardsWrapper">
-        {data && !apiError && data.results.map((data) => <Card key={data.id} data={data} />)}
+      <div className={styles.cardsWrapper} data-cy="cardsWrapper">
+        {data &&
+          !apiError &&
+          data.results.map((data, i) => (
+            <Card key={data.id} data={data}/>
+          ))}
       </div>
     </>
   );

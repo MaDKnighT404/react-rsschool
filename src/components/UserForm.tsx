@@ -196,7 +196,7 @@ const UserForm = () => {
             {...register('html')}
             onChange={(e) => dispatch(updateFormValue({ key: 'html', value: e.target.checked }))}
           />
-          <label htmlFor="html" className={styles.formCheckboxLabel}>
+          <label htmlFor="html" className={styles.formCheckboxLabel} data-cy="htmlInput">
             Html
           </label>
         </div>
@@ -209,7 +209,7 @@ const UserForm = () => {
             {...register('css')}
             onChange={(e) => dispatch(updateFormValue({ key: 'css', value: e.target.checked }))}
           />
-          <label htmlFor="css" className={styles.formCheckboxLabel}>
+          <label htmlFor="css" className={styles.formCheckboxLabel} data-cy="cssInput">
             Css
           </label>
         </div>
@@ -224,7 +224,7 @@ const UserForm = () => {
               dispatch(updateFormValue({ key: 'javascript', value: e.target.checked }))
             }
           />
-          <label htmlFor="javascript" className={styles.formCheckboxLabel}>
+          <label htmlFor="javascript" className={styles.formCheckboxLabel} data-cy="javascriptInput">
             javascript
           </label>
         </div>
@@ -239,7 +239,7 @@ const UserForm = () => {
               dispatch(updateFormValue({ key: 'typescript', value: e.target.checked }))
             }
           />
-          <label htmlFor="typescript" className={styles.formCheckboxLabel}>
+          <label htmlFor="typescript" className={styles.formCheckboxLabel} data-cy="typescriptInput">
             typescript
           </label>
         </div>
@@ -252,7 +252,7 @@ const UserForm = () => {
             {...register('jest')}
             onChange={(e) => dispatch(updateFormValue({ key: 'jest', value: e.target.checked }))}
           />
-          <label htmlFor="jest" className={styles.formCheckboxLabel}>
+          <label htmlFor="jest" className={styles.formCheckboxLabel} data-cy="jestInput">
             Jest
           </label>
         </div>
@@ -265,13 +265,13 @@ const UserForm = () => {
             {...register('react')}
             onChange={(e) => dispatch(updateFormValue({ key: 'react', value: e.target.checked }))}
           />
-          <label htmlFor="react" className={styles.formCheckboxLabel}>
+          <label htmlFor="react" className={styles.formCheckboxLabel} data-cy="reactInput">
             React
           </label>
         </div>
       </fieldset>
 
-      <label className={styles.formToggle}>
+      <label className={styles.formToggle} data-cy="receivedInput">
         <span className={styles.formToggleLabel}>
           I want to receive notifications about promo, sales, etc.
         </span>

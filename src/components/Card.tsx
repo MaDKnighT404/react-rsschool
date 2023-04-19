@@ -16,7 +16,7 @@ const Card = ({ data }: CardProps) => {
 
   return (
     <>
-      <div className={styles.card} onClick={handleCardClick}>
+      <div className={styles.card} onClick={handleCardClick} data-cy={`card#${data.id}`}>
         <div className={styles.cardImgWrapper}>
           <img className={styles.cardImg} src={data.image} alt={data.name} />
           <span className={styles.cardStatus}>{data.status}</span>
