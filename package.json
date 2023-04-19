@@ -14,10 +14,10 @@
     "coverage": "vitest run --coverage",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
+    "cy:report": "npx nyc report && npx nyc report --reporter=text-summary",
     "cypress:console": "start-server-and-test dev http://localhost:3000 cy:run",
     "cypress:browser": "start-server-and-test dev http://localhost:3000 cy:open",
-    "test2": "npx cypress run --e2e && npx nyc report && npx nyc report --reporter=text-summary",
-    "coverage:e2e": "start-server-and-test dev http://localhost:3000 test2"
+    "coverage:e2e": "npm run cypress:console && npm run cy:report"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
